@@ -1,4 +1,10 @@
 ##
+## Android
+snippet alog
+	android.util.Log.${1:i}(${2:TAG}, "${3}");${4}
+snippet atag
+	static final String TAG = "${1:`Filename()`}";${2}
+##
 ## Annotations
 snippet before
 	@Before
