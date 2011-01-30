@@ -67,6 +67,10 @@ snippet m
 ## Create a Variable
 snippet v
 	${1:String} ${2:var}${3: = null}${4};${5}
+snippet mv Member variable
+	final ${1:String} _${2:var};${3}
+snippet cv Assigning variable in a ctor
+	_${1:var} = $1;${2}
 ##
 ## Error Methods
 snippet err
@@ -126,10 +130,12 @@ snippet warn
 	Logger.warn(${1:param});${2}
 ##
 ## Loops
-snippet enfor
+snippet for For each loop
 	for (${1} : ${2}) ${3}
-snippet for
+snippet for Flexible for loop
 	for (${1}; ${2}; ${3}) ${4}
+snippet fo Conventional for loop
+	for (int ${2:i} = 0; $2 < ${1:count}; ++$2) ${3}
 snippet wh
 	while (${1}) ${2}
 ##
