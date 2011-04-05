@@ -8,6 +8,15 @@ snippet afind
 	final ${1:TextView} ${2:view} = ($1) findViewById(R.id.${3:$2});${4}
 ##
 ## Idioms
+snippet constints Inner class to group constants
+	static class ${1} {
+		static final int ${2};
+		${3}
+		static {
+			int i = 0;
+			$2 = i++;
+		}
+	}${4}
 snippet nullclear Resetting a variable
 	if (${1:var} != null) {
 		$1.${2}
