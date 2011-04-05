@@ -7,6 +7,13 @@ snippet atag
 snippet afind
 	final ${1:TextView} ${2:view} = ($1) findViewById(R.id.${3:$2});${4}
 ##
+## Idioms
+snippet nullclear Resetting a variable
+	if (${1:var} != null) {
+		$1.${2}
+		$1 = null;
+	}${3}
+##
 ## Annotations
 snippet before
 	@Before
