@@ -6,6 +6,34 @@ snippet atag
 	static final String TAG = "${1:`Filename()`}";${2}
 snippet afind
 	final ${1:TextView} ${2:view} = ($1) findViewById(R.id.${3:$2});${4}
+snippet aopt Android options menu boilerplate
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see android.app.Activity#onCreateOptionsMenu(Menu)
+	 */
+	public boolean onCreateOptionsMenu(Menu menu) {
+		final MenuInflater pump = getMenuInflater();
+		pump.inflate(R.menu.${1}, menu);
+		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see android.app.Activity#onOptionsItemSelected(MenuItem)
+	 */
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.${2:action}:
+				${3:$2();}
+				return true;
+			${4}
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
+	${5}
 ##
 ## Idioms
 snippet constints Inner class to group constants
