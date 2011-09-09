@@ -64,15 +64,10 @@ snippet wh
 		${2:/* code */}
 	}
 # For Loop
-snippet for
-	for (${2:int} ${3:i} = 0; $3 < ${1:count}; ${4:++}$3) {
-		${5:/* code */}
-	}
-# Custom For Loop
-snippet forr
-	for (${1:int} ${2:i} = ${3:0}; ${4:$2 < 10}; ${5:++}$2) {
-		${6:/* code */}
-	}
+snippet fo Indexed for-loop
+	for (int ${2:i} = 0; $2 < ${1:count}; ++$2) ${3}
+snippet for Custom for-loop
+	for (${1}; ${2}; ${3}) ${4}
 # Function
 snippet fun
 	${1:void} ${2:function_name}(${3})
