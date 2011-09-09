@@ -80,6 +80,9 @@ snippet fund
 # Typedef
 snippet td
 	typedef ${1:int} ${2:MyCustomType};${3}
+# Function pointer
+snippet fptr Function pointer
+	${1:return_type} (${2:function_name})(${3: /* arg types */ })${4: = NULL};${5}
 # Struct
 snippet st
 	struct ${1:`Filename('$1_t', 'name')`} {
