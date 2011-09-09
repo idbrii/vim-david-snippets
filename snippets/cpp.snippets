@@ -1,3 +1,13 @@
+# Casts
+snippet cast Static Cast
+	static_cast<${1}>(${2})${3}
+snippet cast Reinterpret Cast
+	reinterpret_cast<${1}>(${2})${3}
+snippet cast Dynamic Cast
+	dynamic_cast<${1}>(${2})${3}
+snippet cast Const Cast
+	const_cast<${1}>(${2})${3}
+
 # Read File Into Vector
 snippet readfile
 	std::vector<char> v;
