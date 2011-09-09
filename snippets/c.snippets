@@ -45,11 +45,11 @@ snippet once
 snippet if
 	if (${1:/* condition */}) {
 		${2:/* code */}
-	}
+	}${3}
 snippet el
 	else {
 		${1}
-	}
+	}${3}
 # Ternary conditional
 snippet t
 	${1:/* condition */} ? ${2:a} : ${3:b}
@@ -57,12 +57,12 @@ snippet t
 snippet do
 	do {
 		${2:/* code */}
-	} while (${1:/* condition */});
+	} while (${1:/* condition */});${3}
 # While Loop
 snippet wh
 	while (${1:/* condition */}) {
 		${2:/* code */}
-	}
+	}${3}
 # For Loop
 snippet fo Indexed for-loop
 	for (int ${2:i} = 0; $2 < ${1:count}; ++$2) ${3}
@@ -73,7 +73,7 @@ snippet fun
 	${1:void} ${2:function_name}(${3})
 	{
 		${4:/* code */}
-	}
+	}${5}
 # Function Declaration
 snippet fund
 	${1:void} ${2:function_name}(${3});${4}
