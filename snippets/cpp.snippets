@@ -34,6 +34,9 @@ snippet class
 		${4:/* data */}
 	};
 
+snippet for std::iterator for-each loop
+	for (${1:vector<T>}::iterator i = ${2:items.}begin(); i != ${2}end(); ++i) ${3}
+
 # auto iterator
 snippet itera
 	for (auto ${1:i} = $1.begin(); $1 != $1.end(); ++$1) {
