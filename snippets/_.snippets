@@ -3,11 +3,15 @@
 # (c) holds no legal value ;)
 snippet c)
 	Copyright `&enc[:2] == "utf" ? "©" : "(c)"` `strftime("%Y")` ${1:`g:snips_author`}. All Rights Reserved.${2}
-snippet date
+snippet date Numeric date		2011-09-14
 	`strftime("%Y-%m-%d")`
-snippet ddate
-	`strftime("%B %d, %Y")`
+snippet date Human date		14 Sep 2011
+	`strftime("%d %b %Y")`
+snippet date ISO8601 datetime	2011-09-14 11:51:48
+	`strftime("%Y-%m-%d %H:%M:%S")`
 snippet time
-	`strftime("%H:%M")`
+	`strftime("%H:%M:%S")`
+snippet todo
+	TODO(`$USERNAME`): ${1}
 snippet lorem
 	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
