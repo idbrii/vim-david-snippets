@@ -44,6 +44,9 @@ snippet class
 		${4:/* data */}
 	};
 
+snippet dtor
+	virtual ~${1:`Filename('', 'classname')`}();${2}
+
 snippet for std::iterator for-each loop
 	for (${1:vector<T>}::iterator i = ${2:items.}begin(); i != ${2}end(); ++i) ${3}
 
