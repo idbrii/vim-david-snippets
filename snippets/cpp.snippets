@@ -8,6 +8,12 @@ snippet cast Dynamic Cast
 snippet cast Const Cast
 	const_cast<${1}>(${2})${3}
 
+# Pragmas for MSVC
+snippet opt Unoptimize region start
+	#pragma optimize( "", off )${1}
+snippet opt Unoptimize region end
+	#pragma optimize( "", on )${1}
+
 # Read File Into Vector
 snippet readfile
 	std::vector<char> v;
