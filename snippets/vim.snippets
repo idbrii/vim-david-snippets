@@ -1,3 +1,5 @@
+snippet ifnomaps Guard to prevent map defs
+	if !exists("g:${1:`Filename()`}_no_mappings") || !g:$1_no_mappings${2}
 snippet header
 	" File: ${1:`expand('%:t')`}
 	" Author: ${2:`g:snips_author`}
