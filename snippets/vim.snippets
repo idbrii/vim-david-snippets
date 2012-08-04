@@ -1,6 +1,10 @@
 snippet ifnomaps Guard to prevent map defs
 	if !exists("g:${1:`Filename()`}_no_mappings") || !g:$1_no_mappings${2}
-snippet ifhasmapto Plugin mapping
+snippet ifnoexist Define a variable if undefined
+	if !exists("${1:g}:${2:`Filename()`}_${3:var}")
+		let $1:$2_$3 = ${4:value}
+	endif${5}
+snippet ifhasmapto
 	if !hasmapto('<Plug>`substitute(Filename(), '\v(^\w)', '\u\1', '')`${1:Command}')
 		${2:n}map ${3:<buffer> }<${4:LocalLeader}>${5:lhs} <Plug>`substitute(Filename(), '\v(^\w)', '\u\1', '')`$1
 	endif${6}
