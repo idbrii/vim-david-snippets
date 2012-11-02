@@ -8,6 +8,13 @@ snippet cast Dynamic Cast
 snippet cast Const Cast
 	const_cast<${1}>(${2})${3}
 
+snippet ifhack Run-time debug option
+	static bool hack = false;
+	if (hack)
+	{
+		${1}
+	}${2}
+
 # Pragmas for MSVC
 snippet opt Unoptimize region start
 	#pragma optimize( "", off )${1}
