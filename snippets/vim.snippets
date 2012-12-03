@@ -1,3 +1,7 @@
+snippet ifvar If a variable exists and is greater than 0
+	if exists("g:${1:variable}") && g:$1 > 0${2}
+snippet ifnovar If a variable doesn't exist or is equal than 0
+	if !exists("g:${1:variable}") || g:$1 == 0${2}
 snippet ifnomaps Guard to prevent map defs
 	if !exists("g:${1:`Filename()`}_no_mappings") || !g:$1_no_mappings${2}
 snippet ifnoexist Define a variable if undefined
