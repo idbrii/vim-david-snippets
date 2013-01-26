@@ -1,0 +1,399 @@
+##
+## Android
+snippet alog "alog"
+android.util.Log.${1:i}(${2:TAG}, "${3}");${4}
+endsnippet
+
+snippet atag "atag"
+static final String TAG = "${1:`!v Filename()`}";${2}
+endsnippet
+
+snippet afind "afind"
+final ${1:TextView} ${2:view} = ($1) findViewById(R.id.${3:$2});${4}
+endsnippet
+
+snippet aopt "Android options menu boilerplate"
+/**
+ * {@inheritDoc}
+ *
+ * @see android.app.Activity#onCreateOptionsMenu(Menu)
+ */
+public boolean onCreateOptionsMenu(Menu menu) {
+	final MenuInflater pump = getMenuInflater();
+	pump.inflate(R.menu.${1}, menu);
+	return true;
+}
+/**
+ * {@inheritDoc}
+ *
+ * @see android.app.Activity#onOptionsItemSelected(MenuItem)
+ */
+public boolean onOptionsItemSelected(MenuItem item) {
+	switch (item.getItemId()) {
+		case R.id.${2:action}:
+			${3:$2();}
+			return true;
+		${4}
+	}
+	return super.onOptionsItemSelected(item);
+}
+${5}
+endsnippet
+
+##
+## Idioms
+snippet constints "Inner class to group constants"
+static class ${1} {
+	static final int ${2};
+	${3}
+	static {
+		int i = 0;
+		$2 = i++;
+	}
+}${4}
+endsnippet
+
+snippet nullclear "Resetting a variable"
+if (${1:var} != null) {
+	$1.${2}
+	$1 = null;
+}${3}
+endsnippet
+
+##
+## Annotations
+snippet before "before"
+@Before
+static void ${1:intercept}(${2:args}) { ${3} }
+endsnippet
+
+snippet mm "mm"
+@ManyToMany
+${1}
+endsnippet
+
+snippet mo "mo"
+@ManyToOne
+${1}
+endsnippet
+
+snippet om "om"
+@OneToMany${1:(cascade=CascadeType.ALL)}
+${2}
+endsnippet
+
+snippet oo "oo"
+@OneToOne
+${1}
+endsnippet
+
+##
+## Class
+snippet cl "cl"
+class ${1:`!v Filename("", "untitled")`} ${2}
+endsnippet
+
+snippet in "in"
+interface ${1:`!v Filename("", "untitled")`} ${2:extends Parent}${3}
+endsnippet
+
+snippet tc "tc"
+public class ${1:`!v Filename()`} extends ${2:TestCase}
+endsnippet
+
+##
+## Comments
+snippet /* "/*"
+/*
+ * ${1}
+ */
+endsnippet
+
+##
+## Constants
+snippet co "co"
+static public final ${1:String} ${2:var} = ${3};${4}
+endsnippet
+
+snippet cos "cos"
+static public final String ${1:var} = "${2}";${3}
+endsnippet
+
+##
+## Control Statements
+snippet case "case"
+case ${1}:
+	${2}
+endsnippet
+
+snippet def "def"
+default:
+	${2}
+endsnippet
+
+snippet elif "elif"
+else if (${1}) ${2}
+endsnippet
+
+snippet if "if"
+if (${1}) ${2}
+endsnippet
+
+snippet sw "sw"
+switch (${1}) {
+	${2}
+}
+endsnippet
+
+##
+## Create a Method
+snippet m "m"
+${1:void} ${2:method}(${3}) ${4:throws }${5}
+endsnippet
+
+##
+## Create a Variable
+snippet v "v"
+${1:String} ${2:var}${3: = null}${4};${5}
+endsnippet
+
+snippet mv "Member variable"
+final ${1:String} _${2:var};${3}
+endsnippet
+
+snippet cv "Assigning variable in a ctor"
+_${1:var} = $1;${2}
+endsnippet
+
+##
+## Error Methods
+snippet err "err"
+System.err.print("${1:Message}");
+endsnippet
+
+snippet errf "errf"
+System.err.printf("${1:Message}", ${2:exception});
+endsnippet
+
+snippet errln "errln"
+System.err.println("${1:Message}");
+endsnippet
+
+##
+## Exception Handling
+snippet as "as"
+assert ${1:test} : "${2:Failure message}";${3}
+endsnippet
+
+snippet ca "ca"
+catch(${1:Exception} ${2:e}) ${3}
+endsnippet
+
+snippet try "try"
+try {
+	${3}
+}
+catch(${1:Exception} ${2:ex}) {
+}
+endsnippet
+
+snippet tryf "tryf"
+try {
+	${3}
+}
+catch(${1:Exception} ${2:ex}) {
+}
+finally {
+}
+endsnippet
+
+##
+## Find Methods
+snippet findall "findall"
+List<${1:listName}> ${2:items} = ${1}.findAll();${3}
+endsnippet
+
+snippet findbyid "findbyid"
+${1:var} ${2:item} = ${1}.findById(${3});${4}
+endsnippet
+
+##
+## Javadocs
+snippet /** "/**"
+/**
+ * ${1}
+ */
+endsnippet
+
+snippet @au "@au"
+@author `!v system("grep \`id -un\`!v  /etc/passwd | cut -d \":\" -f5")`
+endsnippet
+
+snippet @br "@br"
+@brief ${1:Description}
+endsnippet
+
+snippet @fi "@fi"
+@file ${1:`!v Filename()`}.java
+endsnippet
+
+snippet @pa "@pa"
+@param ${1:param}
+endsnippet
+
+snippet @re "@re"
+@return ${1:param}
+endsnippet
+
+##
+## Logger Methods
+snippet debug "debug"
+Logger.debug(${1:param});${2}
+endsnippet
+
+snippet error "error"
+Logger.error(${1:param});${2}
+endsnippet
+
+snippet info "info"
+Logger.info(${1:param});${2}
+endsnippet
+
+snippet warn "warn"
+Logger.warn(${1:param});${2}
+endsnippet
+
+##
+## Loops
+snippet for "Iterable for-each loop"
+for (${1} : ${2}) ${3}
+endsnippet
+
+snippet forloop "Custom c-style for-loop"
+for (${1}; ${2}; ${3}) ${4}
+endsnippet
+
+snippet fo "Indexed for-loop"
+for (int ${2:i} = 0; $2 < ${1:count}; ++$2) ${3}
+endsnippet
+
+snippet wh "wh"
+while (${1}) ${2}
+endsnippet
+
+##
+## Main method
+snippet main "main"
+public static void main (String[] args) {
+	${1:/* code */}
+}
+endsnippet
+
+##
+## Print Methods
+snippet print "print"
+System.out.print("${1:Message");
+endsnippet
+
+snippet printf "printf"
+System.out.printf("${1:Message", ${2:args});
+endsnippet
+
+snippet println "println"
+System.out.println(${1});
+endsnippet
+
+##
+## Render Methods
+snippet ren "ren"
+render(${1:param});${2}
+endsnippet
+
+snippet rena "rena"
+renderArgs.put("${1}", ${2});${3}
+endsnippet
+
+snippet renb "renb"
+renderBinary(${1:param});${2}
+endsnippet
+
+snippet renj "renj"
+renderJSON(${1:param});${2}
+endsnippet
+
+snippet renx "renx"
+renderXml(${1:param});${2}
+endsnippet
+
+##
+## Setter and Getter Methods
+snippet set "set"
+${1:public} void set${3:}(${2:String} ${4:}){
+	this.$4 = $4;
+}
+endsnippet
+
+snippet get "get"
+${1:public} ${2:String} get${3:}(){
+	return this.${4:};
+}
+endsnippet
+
+##
+## Terminate Methods or Loops
+snippet re "re"
+return
+endsnippet
+
+snippet br "br"
+break;
+endsnippet
+
+##
+## Test Methods
+snippet t "t"
+public void test${1:Name}() throws Exception {
+	${2}
+}
+endsnippet
+
+snippet test "test"
+@Test
+public void test${1:Name}() throws Exception {
+	${2}
+}
+endsnippet
+
+##
+## Utils
+snippet Sc "Sc"
+Scanner
+endsnippet
+
+##
+## Miscellaneous
+snippet action "action"
+public static void ${1:index}(${2:args}) { ${3} }
+endsnippet
+
+snippet rnf "rnf"
+notFound(${1:param});${2}
+endsnippet
+
+snippet rnfin "rnfin"
+notFoundIfNull(${1:param});${2}
+endsnippet
+
+snippet rr "rr"
+redirect(${1:param});${2}
+endsnippet
+
+snippet ru "ru"
+unauthorized(${1:param});${2}
+endsnippet
+
+snippet unless "unless"
+(unless=${1:param});${2}
+endsnippet
+
+
