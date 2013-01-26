@@ -32,8 +32,7 @@ snippet opt "Unoptimize region end"
 #pragma optimize( "", on )${1}
 endsnippet
 
-# Read File Into Vector
-snippet readfile "readfile"
+snippet readfile "read file into vector"
 std::vector<char> v;
 if (FILE *${2:fp} = fopen(${1:"filename"}, "r")) {
 	char buf[1024];
@@ -43,24 +42,20 @@ if (FILE *${2:fp} = fopen(${1:"filename"}, "r")) {
 }${3}
 endsnippet
 
-# std::map
-snippet map "map"
+snippet map "std::map"
 std::map<${1:key}, ${2:value}> ${3};
 endsnippet
 
-# std::vector
-snippet vector "vector"
+snippet vector "std::vector"
 std::vector<${1:char}> ${2};
 endsnippet
 
-# Namespace
-snippet ns "ns"
+snippet ns "Namespace"
 namespace ${1:`!v Filename('', 'my')`} {
 	${2}
 } /* namespace $1 */
 endsnippet
 
-# Class
 snippet class "class"
 class ${1:`!v Filename('$1', 'name')`} 
 {
@@ -72,7 +67,7 @@ private:
 };
 endsnippet
 
-snippet dtor "dtor"
+snippet dtor "destructor"
 virtual ~${1:`!v Filename('', 'classname')`}();${2}
 endsnippet
 
@@ -80,41 +75,29 @@ snippet for "std::iterator for-each loop"
 for (${1:vector<T>}::iterator i = ${2:items.}begin(); i != ${2}end(); ++i) ${3}
 endsnippet
 
-# auto iterator
-snippet itera "itera"
+snippet itera "C++-11 auto iterator"
 for (auto ${1:i} = $1.begin(); $1 != $1.end(); ++$1) {
 	${2:std::cout << *$1 << std::endl;}
 }
 endsnippet
 
-# iterator
-snippet iter "iter"
+snippet iter "iterator"
 for (${1:std::vector}<${2:type}>::${3:const_iterator} ${4:i} = ${5:container}.begin(); $4 != $5.end(); ++$4) {
 	${6}
 }
 endsnippet
 
-# member function implementations
-snippet mfun "mfun"
+snippet mfun "member function implementations"
 ${4:void} ${1:`!v Filename('$1', 'ClassName')`}::${2:memberFunction}(${3}) {
 	${5:return};
 }
 endsnippet
 
-snippet scout "scout"
-std::cout << ${1} << std::endl;
-endsnippet
-
 snippet cout "cout"
-cout << ${1} << endl;
+${1:std::}cout << ${2} << $1endl;
 endsnippet
 
 snippet scin "scin"
-std::cin >> ${1};
+${1:std::}cin >> ${2};
 endsnippet
-
-snippet cin "cin"
-cin >> ${1};
-endsnippet
-
 
