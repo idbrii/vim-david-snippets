@@ -1,12 +1,12 @@
-snippet ifvar "If a variable exists and is greater than 0"
+snippet ifvar "Only if variable exists and is greater than 0"
 if exists("g:${1:variable}") && g:$1 > 0${2}
 endsnippet
 
-snippet ifnovar "If a variable doesn't exist or is equal than 0"
+snippet ifnovar "Only if variable doesn't exist or is equal to 0"
 if !exists("g:${1:variable}") || g:$1 == 0${2}
 endsnippet
 
-snippet ifnomaps "Guard to prevent map defs"
+snippet ifnomaps "Guard to prevent this plugin's map definitions"
 if !exists("g:${1:`!v Filename()`}_no_mappings") || !g:$1_no_mappings${2}
 endsnippet
 
@@ -16,20 +16,19 @@ if !exists("${1:g}:${2:`!v Filename()`}_${3:var}")
 endif${5}
 endsnippet
 
-snippet ifhasmapto "ifhasmapto"
+snippet ifhasmapto "Define a plugin map if not already defined"
 if !hasmapto('<Plug>`!v substitute(Filename(), '\v(^\w)', '\u\1', '')`${1:Command}')
 	${2:n}map ${3:<buffer> }<${4:LocalLeader}>${5:lhs} <Plug>`!v substitute(Filename(), '\v(^\w)', '\u\1', '')`$1
 endif${6}
 endsnippet
 
-snippet header "header"
+snippet header "Vimscript header"
 " File: ${1:`!v expand('%:t')`}
 " Author: ${2:`!v g:snips_author`}
 " Description: ${3}
-${4:" Last Modified: `!v strftime("%B %d, %Y")`}
 endsnippet
 
-snippet guard "guard"
+snippet ifload "Vimscript plugin load guard"
 if exists('${1:loaded_`!v Filename()`}') || &cp${2: || version < 700}
 	finish
 endif
@@ -42,7 +41,7 @@ function! ${1:`!v expand('%') =~ 'autoload' ? substitute(matchstr(expand('%:p'),
 endf${5}
 endsnippet
 
-snippet try "try"
+snippet try "try..catch..end"
 try
 	${1}
 catch ${2}
@@ -50,13 +49,13 @@ catch ${2}
 endtry${4}
 endsnippet
 
-snippet for "for"
+snippet for "for..end"
 for ${1:needle} in ${2:haystack}
 	${3:" code}
 endfor${4}
 endsnippet
 
-snippet while "while"
+snippet while "while..end"
 while ${1:condition}
 	${2:" code}
 endw${3}
@@ -76,7 +75,7 @@ else
 endif${4}
 endsnippet
 
-snippet augroup "augroup"
+snippet augroup "Define an augroup"
 augroup ${1:AU_NAME}
 	" this one is which you're most likely to use?
 	autocmd ${2:BufRead,BufNewFile} ${3:*.ext,*.ext3|<buffer[=N]>} ${4}
