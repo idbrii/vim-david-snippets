@@ -68,4 +68,41 @@ augroup ${1:AU_NAME}
 augroup end${5}
 endsnippet
 
+snippet compiler "Create a compiler script" b
+" Compiler setup for ${1:file_type}
+" For details on creating a compiler file, see ":help write-compiler-plugin".
+" Compiler:	$1
+" Maintainer:	${2:`!v g:snips_author`}
+" Last Change:	`!v strftime("%Y-%m-%d")`
+
+if exists("current_compiler")
+  " TODO: uncomment
+  "finish
+endif
+let current_compiler = "$1"
+
+if exists(":CompilerSet") != 2		" older Vim always used :setlocal
+  command -nargs=* CompilerSet setlocal <args>
+endif
+
+let s:cpo_save = &cpo
+set cpo-=C
+
+" TODO: update makeprg to the appropriate build tool/compiler
+"CompilerSet makeprg=make\ %
+
+" TODO: update the errorformat
+CompilerSet errorformat=$0
+            \%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,
+            \%Z\ \ \ \ %m
+
+let &cpo = s:cpo_save
+unlet s:cpo_save
+
+" TODO: Remove these two lines. They're For testing with Autosource.
+cgetfile ~/${2:logfile.log}
+copen
+
+" vim:set sw=2 sts=2:
+endsnippet
 
