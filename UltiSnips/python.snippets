@@ -58,22 +58,6 @@ def ${1:fname}(${2:`!v indent('.') ? 'self' : ''`}):
 	${3}
 endsnippet
 
-# New Method
-snippet defs "defs"
-def ${1:mname}(self, ${2:arg}):
-	${3:pass}
-endsnippet
-
-# New Property
-snippet property "property"
-def ${1:foo}():
-	doc = "${2:The $1 property.}"
-	def fget(self):
-		${3:return self._$1}
-	def fset(self, value):
-		${4:self._$1 = value}
-endsnippet
-
 # Ifs
 snippet if "if"
 if ${1:condition}:
