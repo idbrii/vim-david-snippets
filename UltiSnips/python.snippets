@@ -36,13 +36,35 @@ with ${1:expr} as ${2:var}:
 	${3:# code...}
 endsnippet
 
-snippet def "function - with david docstring"
-def ${1:fname}(${2:`!v indent('.') ? 'self' : ''`}${3:args}):
-	""" ${4:docstring for $1}
+# Don't use the UltiSnip version of def (which works great for sphinx or
+# doxygen, but I use neither).
+clearsnippets def
 
-    $1(${6:typeof_$3}) -> ${7:result_type}
+snippet def "function with docstrings" b
+def ${1:function}(`!p
+
+def get_args(arglist):
+    """Copied verbatim from UltiSnips/python.snippets"""
+    args = [arg.split('=')[0].strip() for arg in arglist.split(',') if arg]
+    args = [arg for arg in args if arg and arg != "self"]
+    return args
+
+if snip.indent:
+   snip.rv = 'self' + (", " if len(t[2]) else "")`${2:args}):
+	"""${3:@todo: Docstring for $1}
+    
+    $1(${4:`!p
+args = get_args(t[2])
+
+arg_types = ""
+if args:
+   arg_types = "_type, ".join(args)
+   arg_types += "_type"
+
+snip.rv = arg_types
+`}) -> ${5:return_type}
     """
-	${8:pass}
+	${0:pass}
 endsnippet
 
 snippet deff "function - basic"
