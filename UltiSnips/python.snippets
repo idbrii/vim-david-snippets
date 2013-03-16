@@ -1,3 +1,4 @@
+clearsnippets #!
 snippet #! "#!"
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
@@ -5,10 +6,6 @@ endsnippet
 
 snippet imp "import"
 import ${1:module}
-endsnippet
-
-snippet from "import from"
-from ${1:package} import ${2:module}
 endsnippet
 
 snippet docs "module docstring"
@@ -119,47 +116,6 @@ snippet su "super"
 super(${1:Class}, self).${2:method}(${3})${4}
 endsnippet
 
-snippet try "Try/Except"
-try:
-	${1:pass}
-except ${2:Exception}, ${3:e}:
-	${4:raise $3}
-endsnippet
-
-snippet try "Try/Except/Else"
-try:
-	${1:pass}
-except ${2:Exception}, ${3:e}:
-	${4:raise $3}
-else:
-	${5:pass}
-endsnippet
-
-snippet try "Try/Except/Finally"
-try:
-	${1:pass}
-except ${2:Exception}, ${3:e}:
-	${4:raise $3}
-finally:
-	${5:pass}
-endsnippet
-
-snippet try "Try/Except/Else/Finally"
-try:
-	${1:pass}
-except ${2:Exception}, ${3:e}:
-	${4:raise $3}
-else:
-	${5:pass}
-finally:
-	${6:pass}
-endsnippet
-
-snippet ifmain "ifmain"
-if __name__ == '__main__':
-	${1:main()}
-endsnippet
-
 # unit tests
 snippet unittest "Define unittests when executing module"
 if __name__ == '__main__':
@@ -184,16 +140,16 @@ __${1:init}__${2}
 endsnippet
 
 # Debugging
+clearsnippets pdb
 snippet pdb "python debugger (pdb)"
 import pdb; pdb.set_trace()
 endsnippet
-
 
 snippet ipdb "ipython debugger (ipdb)"
 import ipdb; ipdb.set_trace()
 endsnippet
 
-snippet pdbbb "ipython debugger (pdbpp)"
+snippet pdbbb "pdb++ debugger (pdbpp)"
 import pdbpp; pdbpp.set_trace()
 endsnippet
 
@@ -204,17 +160,6 @@ endsnippet
 snippet " "multi-line string"
 """ ${1:doc}
 """
-endsnippet
-
-snippet test "test function/method"
-def test_${1:description}(${2:`!v indent('.') ? 'self' : ''`}):
-	${3:pass}
-endsnippet
-
-snippet testcase "test case"
-class ${1:ExampleCase}(unittest.TestCase):
-	def test_${2:description}(self):
-		${3:pass}
 endsnippet
 
 snippet fut "import from future"
