@@ -36,17 +36,6 @@ with ${1:expr} as ${2:var}:
 	${3:# code...}
 endsnippet
 
-snippet cl "class - with docstring"
-class ${1:ClassName}(${2:object}):
-	"""
-	${3:docstring for $1}
-	"""
-	def __init__(self, ${4:arg}):
-		${5:super($1, self).__init__()}
-		self.$4 = $4
-		${6}
-endsnippet
-
 snippet def "function - with docstring"
 def ${1:fname}(${2:`!v indent('.') ? 'self' : ''`}):
 	"""${3:docstring for $1}"""
