@@ -11,12 +11,12 @@ snippet from "import from"
 from ${1:package} import ${2:module}
 endsnippet
 
-snippet docs "Module Docstring"
-'''
+snippet docs "module docstring"
+"""
 File: ${1:`!v Filename('$1.py', 'foo.py')`}
 Author: ${2:`!v g:snips_author`}
 Description: ${3}
-'''
+"""
 endsnippet
 
 snippet wh "while"
@@ -36,10 +36,13 @@ with ${1:expr} as ${2:var}:
 	${3:# code...}
 endsnippet
 
-snippet def "function - with docstring"
-def ${1:fname}(${2:`!v indent('.') ? 'self' : ''`}):
-	"""${3:docstring for $1}"""
-	${4:pass}
+snippet def "function - with david docstring"
+def ${1:fname}(${2:`!v indent('.') ? 'self' : ''`}${3:args}):
+	""" ${4:docstring for $1}
+
+    $1(${6:typeof_$3}) -> ${7:result_type}
+    """
+	${8:pass}
 endsnippet
 
 snippet deff "function - basic"
@@ -177,8 +180,7 @@ import pprint; pprint.pprint(${1})${2}
 endsnippet
 
 snippet " "multi-line string"
-"""
-${1:doc}
+""" ${1:doc}
 """
 endsnippet
 
