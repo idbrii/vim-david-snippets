@@ -99,9 +99,11 @@ CompilerSet errorformat=$0
 let &cpo = s:cpo_save
 unlet s:cpo_save
 
-" TODO: Remove these two lines. They're For testing with Autosource.
-cgetfile ~/${2:logfile.log}
-copen
+" TODO: Remove this block. It's for testing with Autosource.
+if &ft =~ 'vim'
+  cgetfile ~/${2:logfile.log}
+  copen
+endif
 
 " vim:set sw=2 sts=2:
 endsnippet
