@@ -116,6 +116,10 @@ snippet su "super"
 super(${1:Class}, self).${2:method}(${3})${4}
 endsnippet
 
+snippet cv "Initialize a private member variable (in ctor)" !b
+self._$1 = ${1:var}
+endsnippet
+
 # unit tests
 snippet unittest "Define unittests when executing module"
 if __name__ == '__main__':
