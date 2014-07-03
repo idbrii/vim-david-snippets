@@ -71,6 +71,13 @@ snippet dtor "destructor"
 virtual ~${1:`!v Filename('', 'classname')`}();${2}
 endsnippet
 
+snippet ruleof3 "Copy ctor and copy assignment for Rule of three"
+private:
+	// Private and unimplemented to forbid use.
+	${1:`!v Filename('', 'classname')`}(const $1&);${2}
+	$1& operator=(const $1&);
+endsnippet
+
 snippet for "std::iterator for-each loop"
 for (${1:vector<T>}::iterator i = ${2:items.}begin(); i != ${2}end(); ++i) ${3}
 endsnippet
