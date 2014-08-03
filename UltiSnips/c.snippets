@@ -37,12 +37,18 @@ snippet #if "#if"
 #endif
 endsnippet
 
-# Header Include-Guard
-snippet once "once"
-#ifndef ${1:`!v toupper(Filename('$1_H', 'UNTITLED_H'))`}
+snippet once "Modern include guard" b
+#pragma once
+${0}
+endsnippet
+
+snippet guard "Preprocessor include header" b
+#ifndef ${1:`!p snip.rv = snip.basename.upper() + '_H'`}
 #define $1
-${2}
-#endif /* end of include guard: $1 */
+
+${0}
+
+#endif /* $1 */
 endsnippet
 
 # If Condition
