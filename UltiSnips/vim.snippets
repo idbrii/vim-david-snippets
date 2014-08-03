@@ -7,19 +7,19 @@ if !exists("g:${1:variable}") || g:$1 == 0${2}
 endsnippet
 
 snippet ifnomaps "Guard to prevent this plugin's map definitions"
-if !exists("g:${1:`!v Filename()`}_no_mappings") || !g:$1_no_mappings${2}
+if !exists("g:${1:`!p snip.rv = snip.basename`}_no_mappings") || !g:$1_no_mappings${2}
 endsnippet
 
 snippet ifnoexist "Define a variable if undefined"
-if !exists("${1:g}:${2:`!v Filename()`}_${3:var}")
+if !exists("${1:g}:${2:`!p snip.rv = snip.basename`}_${3:var}")
 	let $1:$2_$3 = ${4:value}
 endif${5}
 endsnippet
 
 snippet ifhasmapto "Define a plugin map if not already defined"
-if !hasmapto('<Plug>`!v substitute(Filename(), '\v(^\w)', '\u\1', '')`${1:Command}')
-	${2:n}map ${3:<buffer> }<${4:LocalLeader}>${5:lhs} <Plug>`!v substitute(Filename(), '\v(^\w)', '\u\1', '')`$1
-endif${6}
+if !hasmapto('<Plug>(${1:`!p snip.rv = snip.basename`}-${2:command})')
+	${3:n}map ${4:<buffer> }<${5:LocalLeader}>${6:lhs} $1$2
+endif${0}
 endsnippet
 
 snippet header "Vimscript header"
@@ -29,7 +29,7 @@ snippet header "Vimscript header"
 endsnippet
 
 snippet ifload "Vimscript plugin load guard"
-if exists('${1:loaded_`!v Filename()`}') || &cp${2: || version < 700}
+if exists('${1:loaded_`!p snip.rv = snip.basename`}') || &cp${2: || version < 700}
 	finish
 endif
 let $1 = 1${3}

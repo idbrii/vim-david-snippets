@@ -5,7 +5,7 @@ android.util.Log.${1:i}(${2:TAG}, "${3}");${4}
 endsnippet
 
 snippet atag "atag"
-static final String TAG = "${1:`!v Filename()`}";${2}
+static final String TAG = "${1:`!p snip.rv = snip.fn`}";${2}
 endsnippet
 
 snippet afind "afind"
@@ -90,15 +90,15 @@ endsnippet
 ##
 ## Class
 snippet cl "cl"
-class ${1:`!v Filename("", "untitled")`} ${2}
+class ${1:`!p snip.rv = snip.basename`} ${2}
 endsnippet
 
 snippet in "in"
-interface ${1:`!v Filename("", "untitled")`} ${2:extends Parent}${3}
+interface ${1:`!p snip.rv = snip.basename`} ${2:extends Parent}${3}
 endsnippet
 
 snippet tc "tc"
-public class ${1:`!v Filename()`} extends ${2:TestCase}
+public class ${1:`!p snip.rv = snip.basename`} extends ${2:TestCase}
 endsnippet
 
 ##
@@ -234,7 +234,7 @@ snippet @br "@br"
 endsnippet
 
 snippet @fi "@fi"
-@file ${1:`!v Filename()`}.java
+@file ${1:`!p snip.rv = snip.fn`}
 endsnippet
 
 snippet @pa "@pa"

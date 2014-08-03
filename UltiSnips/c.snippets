@@ -15,7 +15,7 @@ int main(${1:int argc, const char *argv[]})
 endsnippet
 
 snippet include "include"
-#include "${1:`!v Filename("$1.h")`}"${2}
+#include "${1:`!p snip.rv = snip.basename + '.h'`}"${2}
 endsnippet
 
 # #ifndef ... #define ... #endif
@@ -106,7 +106,7 @@ endsnippet
 
 # Struct
 snippet st "st"
-struct ${1:`!v Filename('$1_t', 'name')`} {
+struct ${1:`!p snip.rv = snip.basename + '_t'`} {
 	${2:/* data */}
 }${3: /* optional variable list */};${4}
 endsnippet

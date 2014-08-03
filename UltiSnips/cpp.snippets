@@ -51,13 +51,13 @@ std::vector<${1:char}> ${2};${0}
 endsnippet
 
 snippet ns "Namespace"
-namespace ${1:`!v Filename('', 'my')`} {
+namespace ${1:`!p snip.rv = snip.basename`} {
 	${0}
 } /* namespace $1 */
 endsnippet
 
 snippet class "class"
-class ${1:`!v Filename('$1', 'name')`} 
+class ${1:`!p snip.rv = snip.basename`} 
 {
 public:
 	$1(${2});
@@ -68,13 +68,13 @@ private:
 endsnippet
 
 snippet dtor "destructor"
-virtual ~${1:`!v Filename('', 'classname')`}();${0}
+virtual ~${1:`!p snip.rv = snip.basename`}();${0}
 endsnippet
 
 snippet ruleof3 "Copy ctor and copy assignment for Rule of three"
 private:
 	// Private and unimplemented to forbid use.
-	${1:`!v Filename('', 'classname')`}(const $1&);${0}
+	${1:`!p snip.rv = snip.basename`}(const $1&);${0}
 	$1& operator=(const $1&);
 endsnippet
 
@@ -95,7 +95,7 @@ for (${1:std::vector}<${2:type}>::${3:const_iterator} ${4:i} = ${5:container}.be
 endsnippet
 
 snippet mfun "member function implementations"
-${4:void} ${1:`!v Filename('$1', 'ClassName')`}::${2:memberFunction}(${3}) {
+${4:void} ${1:`!p snip.rv = snip.basename`}::${2:memberFunction}(${3}) {
 	${5:return};${0}
 }
 endsnippet
