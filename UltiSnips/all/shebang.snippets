@@ -1,0 +1,18 @@
+# Everything should override these. These shebangs are for inserting in
+# files with no filetype. (So then vim can determine the filetype from the
+# shebang.)
+priority -1000
+
+snippet #! "#! python"
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+endsnippet
+
+snippet #! "#! sh"
+#! /bin/sh
+endsnippet
+
+snippet #! "#! bash"
+#! /bin/bash
+endsnippet
+
