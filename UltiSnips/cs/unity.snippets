@@ -1,7 +1,19 @@
 snippet var "Unity: Tunable variable with tooltip" b
 [Tooltip("${3:description}")]
 public ${1:type} ${2:name};
-${0}
+$0
+endsnippet
+
+snippet pub "Unity: Public but not editor-visible variable." b
+[HideInInspector]
+public ${1:type} ${2:name};
+$0
+endsnippet
+
+# Second line must be moved to Start().
+snippet comp "Unity: Cached component" b
+private ${1:type} ${2:name};
+$2 = GetComponent<$1>();$0
 endsnippet
 
 snippet log "Unity: Debug log message" b
@@ -10,4 +22,9 @@ endsnippet
 
 snippet err "Unity: Debug error message" b
 Debug.LogError(${1:msg}, ${2:this});$0
+endsnippet
+
+# Requires my Dbg debugging "library".
+snippet assert "Unity: My assert" b
+Dbg.Assert(${1:predicate}, ${2:msg});$0
 endsnippet
