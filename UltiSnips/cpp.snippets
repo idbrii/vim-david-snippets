@@ -67,15 +67,26 @@ private:
 };${0}
 endsnippet
 
-snippet dtor "destructor"
-virtual ~${1:`!p snip.rv = snip.basename`}();${0}
+snippet dtor "destructor" b
+`!p
+if fn.endswith('.cpp'):
+	snip.rv = t[2] +'::'
+else:
+	snip.rv = 'virtual '
+`~${2:`!p snip.rv = snip.basename`}()`!p
+if fn.endswith('.cpp'):
+	# TODO: How can I end the snippet with the cursor between these braces?
+	snip.rv = '\n{'+ t[0] +'\n}'
+else:
+	snip.rv = ';'+ t[0]
+`
 endsnippet
 
 snippet ruleof3 "Copy ctor and copy assignment for Rule of three"
 private:
 	// Private and unimplemented to forbid use.
-	${1:`!p snip.rv = snip.basename`}(const $1&);${0}
-	$1& operator=(const $1&);
+	${1:`!p snip.rv = snip.basename`}(const $1&);${2: // = delete;}$0
+	$1& operator=(const $1&);$2
 endsnippet
 
 snippet for "std::iterator for-each loop"
