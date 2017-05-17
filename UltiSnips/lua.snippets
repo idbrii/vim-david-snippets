@@ -8,19 +8,19 @@ endsnippet
 # between languages. fori is for integer index loops. Define my own and they
 # seem to clobber the vim-snippets ones.
 
-snippet forp "pair table iteration loop" b
+snippet forp "table iteration loop - pair" b
 for ${1:key},${2:val} in pairs(${3:table_name}) do
 	$0
 end
 endsnippet
 
-snippet for "ipair array iteration loop" b
+snippet for "array iteration loop - ipair" b
 for ${1:i},${2:val} in ipairs(${3:table_name}) do
 	$0
 end
 endsnippet
 
-snippet fori "numeric for loop" b
+snippet fori "numeric iteration loop - range" b
 for ${1:i}=${2:first},${3:last}${4/^..*/(?0:,:)/}${4:step} do
 	$0
 end
