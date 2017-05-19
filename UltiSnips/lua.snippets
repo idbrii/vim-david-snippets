@@ -29,3 +29,7 @@ endsnippet
 snippet print "Debug print" b
 print("`!v g:snips_author`:", ${1:"$2"}$0)
 endsnippet
+
+snippet = "Assignment / increment / decrement" b
+${1:${VISUAL:variable}} = $1 ${2:+} 
+endsnippet
