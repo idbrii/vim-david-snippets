@@ -33,3 +33,21 @@ endsnippet
 snippet = "Assignment / increment / decrement" b
 ${1:${VISUAL:variable}} = $1 ${2:+} 
 endsnippet
+
+# Based on vim-snippets fun but adds classname.
+# TODO(dbriscoe): If I can't find a class definition, can I omit the classname? (How?)
+snippet !fun(ction)?! "New (member) function" br
+function ${1:`!p
+name = snip.basename.capitalize() or "classname"
+class_re = re.compile("local (\w*) = Class")
+for line in snip.buffer:
+	match = class_re.match(line)
+	if match:
+		name = match.group(1)
+		break
+snip.rv = name
+`:}${2:new_function}(${3:args})
+	$0
+end
+endsnippet
+
