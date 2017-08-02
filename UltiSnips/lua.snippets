@@ -1,3 +1,39 @@
+global !p
+def _search_and_return_first_group_from_regex(regex):
+    for line in snip.buffer:
+        match = regex.match(line)
+        if match:
+            return match.group(1)
+    return None
+
+
+def get_lua_classname():
+    # class.lua
+    tablename = _search_and_return_first_group_from_regex(re.compile("local (\w*) = Class"))
+    invoker = ':'
+    if not tablename:
+        # Table-scoped functions.
+        tablename = _search_and_return_first_group_from_regex(re.compile("local ("+ snip.basename +") = ", re.IGNORECASE))
+        invoker = '.'
+    if not tablename:
+        # No scope for functions -- dump in global namespace.
+        tablename = ''
+        invoker = ''
+    return tablename, invoker
+
+# Not shareable. Only exists to extract parsing from snippet.
+def _fun_make_lua_parentcall(klass, t):
+    if not klass:
+        return ''
+    args = t[2]
+    if len(args) > 0:
+        args = ', '+ args
+    return "{klass}._base.{function}(self{args})".format(
+        klass=klass,
+        function=t[1],
+        args=args)
+endglobal
+
 snippet if "If statement" b
 if ${1:condition} then
 	${VISUAL}
@@ -35,22 +71,75 @@ ${1:${VISUAL:variable}} = $1 ${2:+}
 endsnippet
 
 # Based on vim-snippets fun but adds classname.
+# Note: Putting two snippets next to each other (1 and 2) somehow combines them
+# when they're inserted later, so to get the base call line to work, we don't
+# allow classname customization.
 # TODO(dbriscoe): If I can't find a class definition, can I omit the classname? (How?)
 snippet !fun(ction)?! "New (member) function" br
-function ${1:`!p
-name = snip.basename.capitalize() or "classname"
-class_re = re.compile("local (\w*) = Class")
-for line in snip.buffer:
-	match = class_re.match(line)
-	if match:
-		name = match.group(1)
-		break
-snip.rv = name
-`:}${2:new_function}(${3:args})
-	$0
+function `!p
+klass, invoker = get_lua_classname()
+snip.rv = klass + invoker
+`${1:new_function}(${2:args})
+    `!p snip.rv = _fun_make_lua_parentcall(klass, t) `$0
+end
+endsnippet
+
+snippet inject "Inject code around an existing function" b
+local old_$1 = ${2:object name}.${1:function name}
+$2.$1 = function(${3:self}$4)
+    old_$1($3$4)
+    $5
 end
 endsnippet
 
 snippet append "Append an entry to the table's array"
 table.insert(${1:${VISUAL:table}}, ${2:entry})
+endsnippet
+
+snippet imgui "Start an imgui window" b
+local dbui = require("dbui/imgui")
+dbui.Begin("${1:window name}") do
+	$2
+end
+dbui.End()
+endsnippet
+
+snippet debugdraw "Add a child's imgui draw section" b
+function ${1:`!p
+klass, invoker = get_lua_classname()
+snip.rv = klass
+`}:DebugDraw_AddSection(dbui, panel)
+    $1._base.DebugDraw_AddSection(self, dbui, panel)
+
+local TheUI = nil -- Use this global for local hacks to avoid changing function signatures.
+    TheUI = dbui
+
+    dbui.Spacing()
+    dbui.Text("$1")
+    dbui.Indent() do
+        $0
+    end
+    dbui.Unindent()
+end
+endsnippet
+
+snippet debugdraw "Add the parent's setup and call from onupdate" b
+-- global scope
+local DebugPanel = require("dbui/debug_panel")
+local panel = DebugPanel()
+
+-- function scope
+panel:StartFrame()
+local dbui = require("dbui/imgui")
+dbui.Begin("${1:`!p
+klass, invoker = get_lua_classname()
+snip.rv = klass
+`}") do
+    self.${2:widget}:DebugDraw_AddSection(dbui, panel)
+end
+dbui.End()
+endsnippet
+
+snippet uitext "Create a text widget" b
+${1:local name} = ${2:${VISUAL:root}}:AddChild(Text(CHATFONT, 28, "${3:text}"))
 endsnippet
