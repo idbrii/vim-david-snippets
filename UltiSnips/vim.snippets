@@ -1,3 +1,7 @@
+snippet append "Add item to array" b
+add(${1:${VISUAL:list}}, ${2:entry})
+endsnippet
+
 snippet ifvar "Only if variable exists and is greater than 0"
 if exists("g:${1:variable}") && g:$1 > 0${2}
 endsnippet
