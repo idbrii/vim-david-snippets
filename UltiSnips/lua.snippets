@@ -84,6 +84,14 @@ snip.rv = klass + invoker
 end
 endsnippet
 
+# Similar to vim-snippets, but requires a preceeding word
+snippet !(\S|=\s*)fun(ction)?! "Anonymous function" r
+`!p snip.rv = match.group(1)
+`function(${2:args})
+	$0
+end
+endsnippet
+
 snippet inject "Inject code around an existing function" b
 local old_$1 = ${2:object name}.${1:function name}
 $2.$1 = function(${3:self}$4)
