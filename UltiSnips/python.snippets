@@ -26,19 +26,19 @@ endsnippet
 
 snippet wh "while"
 while ${1:condition}:
-	${2:# code...}
+	${2:${VISUAL:# code...}}
 endsnippet
 
 snippet dowh "do..while equivalent"
 while True:
-	${1:# code...}
+	${1:${VISUAL:# code...}}
 	if ${2:condition}:
 		break
 endsnippet
 
 snippet with "with block"
 with ${1:expr} as ${2:var}:
-	${3:# code...}
+	${3:${VISUAL:# code...}}
 endsnippet
 
 # Don't use the UltiSnip version of def (which works great for sphinx or
@@ -80,7 +80,7 @@ endsnippet
 # Ifs
 snippet if "if"
 if ${1:condition}:
-	${2:code...}
+	${2:${VISUAL:code...}}
 endsnippet
 
 snippet el "else"
