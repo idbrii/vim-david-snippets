@@ -169,8 +169,16 @@ snippet pprint "pprint"
 import pprint; pprint.pprint(${1})${2}
 endsnippet
 
-snippet " "multi-line string"
+# Limit quote as snippet to specific scenarios (first nonblank or
+# following equals) so it's not accidentially expanded within other
+# snippets.
+snippet " "multi-line string" b
 """ ${1:doc}
+"""
+endsnippet
+
+snippet '=\s*\"' "multi-line string" r
+= """ ${1:doc}
 """
 endsnippet
 
