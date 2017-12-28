@@ -10,6 +10,13 @@ public ${1:type} ${2:name};
 $0
 endsnippet
 
+snippet priv "Unity: Private but editor-visible variable." b
+[Tooltip("${3:description}")]
+[SerializeField] // show in editor
+private ${1:type} ${2:name};
+$0
+endsnippet
+
 # Second line must be moved to Start().
 snippet comp "Unity: Cached component" b
 private ${1:type} ${2:name};
