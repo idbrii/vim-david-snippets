@@ -52,12 +52,12 @@ function! ${1:`!v expand('%') =~ 'autoload' ? substitute(matchstr(expand('%:p'),
 endf${5}
 endsnippet
 
-snippet try "try..catch..end"
+snippet try "try..catch-error..end"
 try
-	${1}
-catch ${2}
-	${3}
-endtry${4}
+	${4:${VISUAL}}
+catch ${1:/^Vim\%((\a\+)\)\=:${2:E384}/	" Error: ${3:search hit TOP without match}}
+	${5}
+endtry
 endsnippet
 
 snippet for "for..end"
