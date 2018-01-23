@@ -17,7 +17,7 @@ $2 = GetComponent<$1>();$0
 endsnippet
 
 snippet log "Unity: Debug log message" b
-Debug.Log(${1:msg}, ${2:this});$0
+Debug.Log(${1:string.Format("{0} {1}$2", $3)}, ${4:this});$0
 endsnippet
 
 snippet err "Unity: Debug error message" b
@@ -29,6 +29,10 @@ snippet assert "Unity: My assert" b
 Dbg.Assert(${1:predicate}, ${2:msg});$0
 endsnippet
 
+snippet stack "Print a stack trace" b
+Debug.LogError("`!v g:snips_author` ${1:}", ${2:null});$0
+endsnippet
+
 snippet inheader "Header section for inspector" b
 [Header("${1:heading}")]
 endsnippet
@@ -36,3 +40,14 @@ endsnippet
 snippet inspace "Spacer section for inspector" b
 [Space(${1:10})]
 endsnippet
+
+snippet debugdraw "Debug draw to MonoBehaviour" b
+void OnGUI()
+{
+	GUILayout.BeginVertical();
+	{
+		GUILayout.Label(string.Format(${1:"x={0} y={1}", x, y}$0));
+	}
+}
+endsnippet
+

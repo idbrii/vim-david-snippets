@@ -3,3 +3,19 @@ snippet new "Construction of an object" b
 ${1:Type} ${2:variable} = new $1(${3:args});
 endsnippet
 
+snippet append "Append an entry to a List" b
+${1:${VISUAL:destination}}.Add(${2:entry});
+endsnippet
+
+snippet append "Merge a list into another List" b
+${1:${VISUAL:destination}}.AddRange(${2:source});
+endsnippet
+
+snippet fmt "String format"
+string.Format("{0}${2: {1} {2}}", ${1:${VISUAL:data}});
+endsnippet
+
+snippet dump "String format"
+string.Format("${1:a}={0} ${2:a}={1} ${3:a}={2}", $1, $2, $3);
+endsnippet
+
