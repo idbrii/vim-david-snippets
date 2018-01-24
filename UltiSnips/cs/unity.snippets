@@ -42,12 +42,31 @@ snippet inspace "Spacer section for inspector" b
 endsnippet
 
 snippet debugdraw "Debug draw to MonoBehaviour" b
+using UnityEditor;
 void OnGUI()
 {
 	GUILayout.BeginVertical();
 	{
 		GUILayout.Label(string.Format(${1:"x={0} y={1}", x, y}$0));
 	}
+	GUILayout.EndVertical();
 }
 endsnippet
 
+snippet libdebug "Add some debug draw functions" b
+void DrawArrow(Vector3 start, Vector3 delta, Color arrow_color, float duration, bool do_depth_test)
+{
+	Debug.DrawRay(start, delta, arrow_color, duration, do_depth_test);
+	// Not really an arrowhead, but close enough.
+	DrawPoint(start + delta, arrow_color, duration);
+}
+
+void DrawPoint(Vector3 position, Color point_color, float duration, bool do_depth_test)
+{
+	// TODO: Could be more done with two lines.
+	Debug.DrawRay(position, 0.1f * Vector3.up,    point_color, duration, do_depth_test);
+	Debug.DrawRay(position, 0.1f * Vector3.down,  point_color, duration, do_depth_test);
+	Debug.DrawRay(position, 0.1f * Vector3.left,  point_color, duration, do_depth_test);
+	Debug.DrawRay(position, 0.1f * Vector3.right, point_color, duration, do_depth_test);
+}
+endsnippet
