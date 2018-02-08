@@ -88,7 +88,7 @@ void DrawArrow(Vector3 start, Vector3 delta, Color arrow_color, float duration, 
 {
 	Debug.DrawRay(start, delta, arrow_color, duration, do_depth_test);
 	// Not really an arrowhead, but close enough.
-	DrawPoint(start + delta, arrow_color, duration);
+	DrawPoint(start + delta, arrow_color, duration, do_depth_test);
 }
 
 void DrawPoint(Vector3 position, Color point_color, float duration, bool do_depth_test)
