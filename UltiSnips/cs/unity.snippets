@@ -17,6 +17,29 @@ private ${1:type} ${2:name};
 $0
 endsnippet
 
+snippet startawake "Awake and Start functions with description" b
+void Awake() {
+    // Init variables here
+}
+void Start() {
+    // First update happens here
+}
+endsnippet
+
+snippet collision "Collision response for hitting something" b
+void OnCollision${1:Enter/Stay/Exit}${2:2D}(Collision$2 ${3:victim})
+{
+    $3.gameObject$4;
+}
+endsnippet
+
+snippet trigger "Collision response for overlapping with something" b
+void OnTrigger${1:Enter/Stay/Exit}${2:2D}(Collider$2 ${3:victim})
+{
+    $3.gameObject$4;
+}
+endsnippet
+
 # Second line must be moved to Start().
 snippet comp "Unity: Cached component" b
 private ${1:type} ${2:name};
