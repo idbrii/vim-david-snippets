@@ -100,3 +100,55 @@ void DrawPoint(Vector3 position, Color point_color, float duration, bool do_dept
 	Debug.DrawRay(position, 0.1f * Vector3.right, point_color, duration, do_depth_test);
 }
 endsnippet
+
+#
+# Skeletons
+#
+
+snippet skel "Unity: New MonoBehavior" b
+using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
+using UnityEngine;
+
+public class ${1:`!p snip.rv = snip.basename`} : MonoBehaviour
+{
+$0
+}
+endsnippet
+
+snippet skel "Unity: New EditorWindow" b
+using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
+using UnityEditor.SceneManagement;
+using UnityEditor;
+using UnityEngine;
+
+public class ${1:`!p snip.rv = snip.basename`} : EditorWindow
+{
+	[MenuItem("${Tools/$1}")]
+	static void ShowToolbar()
+	{
+		EditorWindow.GetWindow(typeof($1));
+	}
+
+	void OnEnable()
+	{
+		titleContent = new GUIContent("$1");
+	}
+
+
+	private Vector2 scroll;
+	public void OnGUI()
+	{
+		scroll = EditorGUILayout.BeginScrollView(scroll);
+		{
+			${2:content}
+		}
+		EditorGUILayout.EndScrollView();
+	}
+
+}
+endsnippet
+
