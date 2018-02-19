@@ -109,6 +109,7 @@ snippet skel "Unity: New MonoBehavior" b
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
+using System;
 using UnityEngine;
 
 public class ${1:`!p snip.rv = snip.basename`} : MonoBehaviour
@@ -117,10 +118,34 @@ $0
 }
 endsnippet
 
+snippet skel "Unity: New ScriptableObject" b
+using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
+using System;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "$1", menuName = "`!p
+# where it appears in the right click menu. Use company name as a folder to
+# group our stuff away from built-in.
+snip.rv = "{group}/{cmd}".format(
+    group = vim.vars['snips_company'],
+    cmd = t[1])
+`", order = 1)]
+public class ${1:`!p snip.rv = snip.basename`} : ScriptableObject
+{
+	void Awake()
+	{
+	}
+$0
+}
+endsnippet
+
 snippet skel "Unity: New EditorWindow" b
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
+using System;
 using UnityEditor.SceneManagement;
 using UnityEditor;
 using UnityEngine;
