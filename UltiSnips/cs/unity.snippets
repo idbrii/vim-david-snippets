@@ -128,7 +128,7 @@ endsnippet
 # Skeletons
 #
 
-snippet skel "Unity: New MonoBehavior" b
+snippet skel "Unity: New MonoBehaviour" b
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
@@ -206,3 +206,68 @@ public class ${1:`!p snip.rv = snip.basename`} : EditorWindow
 }
 endsnippet
 
+snippet skel "Unity: New PropertyAttribute" b
+using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+// This class should *not* live in Editor unless it can only decorate Editor classes!
+namespace Game.Inspector
+{
+
+	// Defines an attribute that ${2}
+	// Use like this:
+	//      [$1`!p
+if t[2]:
+	if t[3] == 'string':
+		snip.rv = '("{content}")'.format(content=t[4])
+	else:
+		snip.rv = '(5)'
+else:
+	snip.rv = ''
+`] public Quaternion m_MinRotation;
+
+	public class ${1:`!p snip.rv = snip.basename`}Attribute : PropertyAttribute {
+		${2:public ${3:string} ${4:InputToAttribute};
+		public $1Attribute($3 $4)
+		{
+			this.$4 = $4;
+		}}
+	}
+
+#if UNITY_EDITOR
+	[CustomPropertyDrawer(typeof($1Attribute))]
+	public class $1Drawer : PropertyDrawer {
+		public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
+			return EditorGUIUtility.singleLineHeight * (EditorGUIUtility.wideMode ? 1f : 2f);
+		}
+
+		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
+			`!p
+if t[2]:
+	snip.rv = 'var {var_name} = attribute as {type_name}Attribute;'.format(type_name=t[1], var_name=t[1].lower())
+else:
+	snip.rv = ''
+`
+			// Pull data from your decorated property.
+			Vector3 euler = property.quaternionValue.eulerAngles;
+			EditorGUI.BeginProperty(position, label, property);
+			{
+				EditorGUI.BeginChangeCheck();
+				// Define fields you want to expose.
+				euler = EditorGUI.Vector3Field(position, label, euler);
+				if (EditorGUI.EndChangeCheck())
+				{
+					// Apply data back to decorated property.
+					property.quaternionValue = Quaternion.Euler(euler);
+				}
+			}
+			EditorGUI.EndProperty();
+		}
+	}
+#endif
+
+}
+endsnippet
