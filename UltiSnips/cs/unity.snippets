@@ -1,3 +1,20 @@
+global !p
+def _search_and_return_first_group_from_regex(regex):
+    for line in snip.buffer:
+        match = regex.match(line)
+        if match:
+            return match.group(1)
+    return None
+
+def get_cs_classname():
+    return _search_and_return_first_group_from_regex(re.compile(".*class (\w*)"))
+
+def get_cs_parentclass():
+    return _search_and_return_first_group_from_regex(re.compile(".*class \w+ : (\w+)"))
+
+endglobal
+
+
 snippet var "Unity: Tunable variable with tooltip" b
 [Tooltip("${3:description}")]
 public ${1:type} ${2:name};
@@ -47,7 +64,13 @@ $2 = GetComponent<$1>();$0
 endsnippet
 
 snippet log "Unity: Debug log message" b
-Debug.Log(${1:string.Format("{0} {1}$2", $3)}, ${4:this});$0
+Debug.Log(${1:string.Format("{0} {1}$2", $3)}`!p
+parent = get_cs_parentclass()
+if parent:
+	valid_this = ['MonoBehaviour', 'ScriptableObject']
+	if any([p_class in parent for p_class in valid_this]):
+		snip.rv = ', this'
+`);$0
 endsnippet
 
 snippet err "Unity: Debug error message" b
