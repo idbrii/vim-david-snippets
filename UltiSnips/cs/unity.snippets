@@ -12,6 +12,13 @@ def get_cs_classname():
 def get_cs_parentclass():
     return _search_and_return_first_group_from_regex(re.compile(".*class \w+ : (\w+)"))
 
+def is_parent_class_unityobject():
+	parent = get_cs_parentclass()
+	if parent:
+		valid_this = ['MonoBehaviour', 'ScriptableObject']
+		return any([p_class in parent for p_class in valid_this])
+	return False
+
 endglobal
 
 
@@ -65,16 +72,16 @@ endsnippet
 
 snippet log "Unity: Debug log message" b
 Debug.Log(${1:string.Format("{0} {1}$2", $3)}`!p
-parent = get_cs_parentclass()
-if parent:
-	valid_this = ['MonoBehaviour', 'ScriptableObject']
-	if any([p_class in parent for p_class in valid_this]):
-		snip.rv = ', this'
+if is_parent_class_unityobject():
+	snip.rv = ', this'
 `);$0
 endsnippet
 
 snippet err "Unity: Debug error message" b
-Debug.LogError(${1:msg}, ${2:this});$0
+Debug.LogError(${1:msg}`!p
+if is_parent_class_unityobject():
+	snip.rv = ', this'
+`);$0
 endsnippet
 
 # Requires my Dbg debugging "library".
