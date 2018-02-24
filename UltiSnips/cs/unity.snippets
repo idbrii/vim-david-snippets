@@ -53,14 +53,14 @@ endsnippet
 
 snippet log "Unity: Debug log message" b
 Debug.Log(${1:string.Format("{0} {1}$2", $3)}`!p
-if is_parent_class_unityobject(snip):
+if is_parent_class_unityobject():
 	snip.rv = ', this'
 `);$0
 endsnippet
 
 snippet err "Unity: Debug error message" b
 Debug.LogError(${1:msg}`!p
-if is_parent_class_unityobject(snip):
+if is_parent_class_unityobject():
 	snip.rv = ', this'
 `);$0
 endsnippet
