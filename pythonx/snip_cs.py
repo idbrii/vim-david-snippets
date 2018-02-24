@@ -1,6 +1,15 @@
 import re
 import vim
 
+def _search_and_return_first_group_from_regex_before_current_line(regex):
+    w = vim.current.window
+    row, col = w.cursor
+    for line in reversed(vim.current.window.buffer[:row]):
+        match = regex.match(line)
+        if match:
+            return match.groups()
+    return None
+
 def _search_and_return_first_group_from_regex(regex):
     for line in vim.current.window.buffer:
         match = regex.match(line)
@@ -14,7 +23,10 @@ def get_cs_classname():
 def get_cs_parentclass():
     return _search_and_return_first_group_from_regex(re.compile(".*class \w+ : (\w+)"))
 
-def is_parent_class_unityobject():
+def has_access_to_unityobject():
+    static_line, method = _search_and_return_first_group_from_regex_before_current_line(re.compile("^.*?(static)?\s+(\S+\s+[A-Z]\S+)\(.*\)\s*$"))
+    if static_line:
+        return False
     parent = get_cs_parentclass()
     if parent:
         valid_this = ['MonoBehaviour', 'ScriptableObject']
