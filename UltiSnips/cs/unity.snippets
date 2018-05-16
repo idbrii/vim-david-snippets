@@ -169,7 +169,7 @@ using Object = UnityEngine.Object;
 
 public class ${1:`!p snip.rv = snip.basename`} : EditorWindow
 {
-	[MenuItem("${Tools/$1}")]
+	[MenuItem("${2:Tools/$1}")]
 	static void ShowToolbar()
 	{
 		EditorWindow.GetWindow(typeof($1));
@@ -186,7 +186,7 @@ public class ${1:`!p snip.rv = snip.basename`} : EditorWindow
 	{
 		scroll = EditorGUILayout.BeginScrollView(scroll);
 		{
-			${2:content}
+			${3:content}
 		}
 		EditorGUILayout.EndScrollView();
 	}
