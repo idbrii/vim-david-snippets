@@ -61,3 +61,9 @@ foreach (${3:var} ${2:entry} in ${1:items})
 }
 endsnippet
 
+snippet ifdef "ifdef"
+#if ${1:SYMBOL}
+	${2:${VISUAL:#define }}$0
+#endif
+endsnippet
+

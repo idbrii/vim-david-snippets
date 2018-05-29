@@ -27,13 +27,7 @@ endsnippet
 
 snippet ifdef "ifdef"
 #ifdef ${1:SYMBOL}
-	${2:#define }
-#endif
-endsnippet
-
-snippet #if "#if"
-#if ${1:FOO}
-	${2}
+	${2:${VISUAL:#define }}$0
 #endif
 endsnippet
 
