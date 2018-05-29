@@ -5,6 +5,10 @@ clearsnippets sim
 # Remove unused and unintuitive snippets from vim-snippets.
 clearsnippets svm da cw cwp
 
+snippet debugname "A class attribute to rename type in debugger watch window" b
+[System.Diagnostics.DebuggerDisplay("name = {${1:variable name}}")]
+endsnippet
+
 snippet new "Construction of an object" b
 ${1:Type} ${2:variable} = new $1(${3:args});
 endsnippet
