@@ -22,7 +22,7 @@ private ${1:type} ${2:name};
 $0
 endsnippet
 
-snippet startawake "Awake and Start functions with description" b
+snippet startawake "Unity: Awake and Start functions with description" b
 void Awake() {
 	// Init variables here
 }
@@ -31,14 +31,14 @@ void Start() {
 }
 endsnippet
 
-snippet collision "Collision response for hitting something" b
+snippet collision "Unity: Collision response for hitting something" b
 void OnCollision${1:Enter/Stay/Exit}${2:2D}(Collision$2 ${3:victim})
 {
 	$3.gameObject$4;
 }
 endsnippet
 
-snippet trigger "Collision response for overlapping with something" b
+snippet trigger "Unity: Collision response for overlapping with something" b
 void OnTrigger${1:Enter/Stay/Exit}${2:2D}(Collider$2 ${3:victim})
 {
 	$3.gameObject$4;
@@ -70,19 +70,19 @@ snippet assert "Unity: My assert" b
 Dbg.Assert(${1:predicate}, ${2:msg});$0
 endsnippet
 
-snippet stack "Print a stack trace" b
+snippet stack "Unity: Print a stack trace" b
 Debug.LogError("`!v g:snips_author` ${1:}", ${2:null});$0
 endsnippet
 
-snippet inheader "Header section for inspector" b
+snippet inheader "Unity: Header section for inspector" b
 [Header("${1:heading}")]
 endsnippet
 
-snippet inspace "Spacer section for inspector" b
+snippet inspace "Unity: Spacer section for inspector" b
 [Space(${1:10})]
 endsnippet
 
-snippet debugdraw "Debug draw to MonoBehaviour" b
+snippet debugdraw "Unity: Debug draw to MonoBehaviour" b
 using UnityEditor;
 void OnGUI()
 {
@@ -94,7 +94,7 @@ void OnGUI()
 }
 endsnippet
 
-snippet libdebug "Add some debug draw functions" b
+snippet libdebug "Unity: Add some debug draw functions" b
 void DrawArrow(Vector3 start, Vector3 delta, Color arrow_color, float duration, bool do_depth_test)
 {
 	Debug.DrawRay(start, delta, arrow_color, duration, do_depth_test);
