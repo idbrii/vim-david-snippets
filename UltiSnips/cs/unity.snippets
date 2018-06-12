@@ -172,12 +172,7 @@ public class ${1:`!p snip.rv = snip.basename`} : EditorWindow
 	[MenuItem("${2:Tools/$1}")]
 	static void ShowToolbar()
 	{
-		EditorWindow.GetWindow(typeof($1));
-	}
-
-	void OnEnable()
-	{
-		titleContent = new GUIContent("$1");
+		EditorWindow.GetWindow<$1>("$1");
 	}
 
 
@@ -191,6 +186,50 @@ public class ${1:`!p snip.rv = snip.basename`} : EditorWindow
 		EditorGUILayout.EndScrollView();
 	}
 
+}
+endsnippet
+
+snippet skel "Unity: New CustomEditor" b
+using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
+using System;
+using UnityEditor;
+using UnityEngine;
+
+namespace ${1:Editors}
+{
+	[CustomEditor(typeof(${2:`!p
+suffix = "_Editor"
+name = t[1]
+if name.endswith(suffix):
+	snip.rv = name[0:-len(suffix)]
+else:
+	snip.rv = name
+`}))]
+	class ${1:`!p snip.rv = snip.basename`} : Editor
+	{
+
+		public override void OnInspectorGUI()
+		{
+			base.OnInspectorGUI();
+
+			GUILayout.BeginHorizontal();
+			{
+				GUILayout.Label("Action");
+
+				if (GUILayout.Button(new GUIContent(
+								"Do Action",
+								"Tooltip for action")))
+				{
+					var toggle = target as $2;
+					${3:toggle.Action();}
+				}
+			}
+			GUILayout.EndHorizontal();
+		}
+
+	}
 }
 endsnippet
 
