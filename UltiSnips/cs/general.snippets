@@ -1,3 +1,6 @@
+global !p
+import snip_c as c
+endglobal
 
 # Remove unused snippets from vim-snippets that conflict with common words
 # (causes nested snippet insertion).
@@ -69,5 +72,20 @@ snippet ifdef "ifdef"
 #if ${1:SYMBOL}
 ${2:${VISUAL:#define }}$0
 #endif
+endsnippet
+
+snippet /sw(itch)?/ "switch statement" brm
+switch (${1:pivot})
+{`!p
+if snip.v.text:
+	lines = c.convert_enum_to_switch(snip.v.text)
+	for pair in lines:
+		snip >> pair[0]
+		snip += pair[1]
+		snip << pair[0]
+else:
+	snip += ""
+`$0
+}
 endsnippet
 
