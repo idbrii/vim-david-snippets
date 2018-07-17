@@ -120,6 +120,14 @@ void DrawPoint(Vector3 position, Color point_color, float duration, bool do_dept
 }
 endsnippet
 
+snippet menu "Unity: MenuItem" b
+[UnityEditor.MenuItem("GameObject/$1")]
+static void Menu_${1:Action}()
+{
+	$0
+}
+endsnippet
+
 #
 # Skeletons
 #
