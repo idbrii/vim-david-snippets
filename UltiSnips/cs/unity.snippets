@@ -160,7 +160,7 @@ using Object = UnityEngine.Object;
 # where it appears in the right click menu. Use company name as a folder to
 # group our stuff away from built-in.
 snip.rv = "{group}/{cmd}".format(
-	group = vim.vars['snips_company'],
+	group = vim.vars['snips_company'].decode("utf-8"),
 	cmd = t[1])
 `", order = 1)]
 public class ${1:`!p snip.rv = snip.basename`} : ScriptableObject
