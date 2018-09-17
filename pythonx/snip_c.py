@@ -86,6 +86,15 @@ def convert_enum_to_switch(enum_value_textblock):
     ... '''
     >>> test(enum_text_explicit)
 
+    >>> enum_text_parens = '''enum Actions : int {
+    ...     Idle = 0,
+    ...     Grab = 1,
+    ...     Place = 2,
+    ...     Throw = 3,
+    ... }
+    ... '''
+    >>> test(enum_text_parens)
+
     >>> enum_text_cpp = '''enum class Actions
     ... {
     ...     Idle,
@@ -97,15 +106,16 @@ def convert_enum_to_switch(enum_value_textblock):
     >>> test(enum_text_cpp)
 
     """
+    paren_line_re = re.compile("^\s*[{}]\s*$")
     enum_value_lines = enum_value_textblock.split('\n')
-    enum_value_lines = [line.strip() for line in enum_value_lines if re.search("[{}]", line) is None]
+    enum_value_lines = [line.strip() for line in enum_value_lines if paren_line_re.search(line) is None]
     enum_value_lines = [line for line in enum_value_lines if len(line) > 0]
     enum_type = extract_enum_type(enum_value_lines[0])
     if enum_type:
         enum_value_lines = enum_value_lines[1:] # skip typename
     else:
         enum_type = "EnumType"
-    enum_value_lines = [line.strip() for line in enum_value_lines if re.search(line, "[{}]") is None]
+    enum_value_lines = [line.strip() for line in enum_value_lines if paren_line_re.search(line) is None]
     case_pairs = [__convert_enum_to_case(enum_type, case) for case in enum_value_lines]
     case_lines = []
     for a in case_pairs:
