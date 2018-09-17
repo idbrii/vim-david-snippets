@@ -3,7 +3,7 @@
 import re
 
 def __convert_enum_to_case(enum_type, enum_value_text):
-    enum_value_text = re.sub('(,.*)?\s*$', ':', enum_value_text)
+    enum_value_text = re.sub('(\s*=[^,]*)?(,.*)?\s*$', ':', enum_value_text)
     case = []
     case.append((1, "case {t}.{v}".format(t=enum_type, v=enum_value_text)))
     case.append((2, "break;"))
@@ -60,6 +60,11 @@ def convert_enum_to_switch(enum_value_textblock):
     """
     convert_enum_to_switch(str, object) -> str
 
+    >>> expected = [(1, 'case Actions.Idle:'), (2, 'break;'), (2, ''), (1, 'case Actions.Grab:'), (2, 'break;'), (2, ''), (1, 'case Actions.Place:'), (2, 'break;'), (2, ''), (1, 'case Actions.Throw:'), (2, 'break;'), (2, '')]
+    >>> def test(case):
+    ...     for a,b in zip(convert_enum_to_switch(case), expected):
+    ...         assert a == b, "Output {0} didn't match expected {1}".format(a,b)
+    >>>
     >>> enum_text = '''
     ... public enum Actions
     ... {
@@ -69,6 +74,18 @@ def convert_enum_to_switch(enum_value_textblock):
     ...     Throw,
     ... }
     ... '''
+    >>> test(enum_text)
+
+    >>> enum_text_explicit = '''enum Actions : int
+    ... {
+    ...     Idle = 0,
+    ...     Grab = 1,
+    ...     Place = 2,
+    ...     Throw = 3,
+    ... }
+    ... '''
+    >>> test(enum_text_explicit)
+
     >>> enum_text_cpp = '''enum class Actions
     ... {
     ...     Idle,
@@ -77,20 +94,8 @@ def convert_enum_to_switch(enum_value_textblock):
     ...     Throw
     ... };
     ... '''
-    >>> for pair in convert_enum_to_switch(enum_text_cpp):
-    ...     print(("    " * pair[0]) + pair[1])
-        case Actions.Idle:
-            break;
-    <BLANKLINE>
-        case Actions.Grab:
-            break;
-    <BLANKLINE>
-        case Actions.Place:
-            break;
-    <BLANKLINE>
-        case Actions.Throw:
-            break;
-    <BLANKLINE>
+    >>> test(enum_text_cpp)
+
     """
     enum_value_lines = enum_value_textblock.split('\n')
     enum_value_lines = [line.strip() for line in enum_value_lines if re.search("[{}]", line) is None]
