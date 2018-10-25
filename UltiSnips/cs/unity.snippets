@@ -230,16 +230,15 @@ else:
 		{
 			base.OnInspectorGUI();
 
+			var ${3:`!p snip.rv = t[2].lower()`} = target as $2;
+
 			GUILayout.BeginHorizontal();
 			{
-				GUILayout.Label("Action");
-
 				if (GUILayout.Button(new GUIContent(
 								"Do Action",
 								"Tooltip for action")))
 				{
-					var toggle = target as $2;
-					${3:toggle.Action();}
+					${4:$3.Action();}
 				}
 			}
 			GUILayout.EndHorizontal();
