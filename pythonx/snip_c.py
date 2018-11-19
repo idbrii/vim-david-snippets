@@ -3,7 +3,7 @@
 import re
 
 def __convert_enum_to_case(enum_type, enum_value_text):
-    enum_value_text = re.sub('(\s*=[^,]*)?(,.*)?\s*$', ':', enum_value_text)
+    enum_value_text = re.sub('(\s*=[^,]*)?(,.*)?\s*$', ':', enum_value_text, count=1)
     case = []
     case.append((1, "case {t}.{v}".format(t=enum_type, v=enum_value_text)))
     case.append((2, "break;"))
