@@ -47,6 +47,29 @@ using System.Linq;
 using System;
 endsnippet
 
+# I never remember the order of inputs to GroupBy and the msdn page is
+# indecipherable. This seems to be the only practical override to use.
+snippet .group "Linq GroupBy" b
+.GroupBy(${1:item} => $1.${2:group-key}, $1 => $1.${3:grouped-attribute});
+foreach (var $1_group in ${4:linq-result})
+{
+	// $1_group.Key is the group key.
+	foreach (var $1 in $1_group)
+	{
+		${5:each item in group}
+	}
+}
+endsnippet
+
+# Not sure this is actually useful in practice. We're processing the groups in
+# a lambda instead of in a loop.
+snippet .groupcomplex "Linq GroupBy lambda lambda" b
+.GroupBy(${1:item} => $1.${2:group-key}, $1 => $1, (key, $1s) => new {
+	Key = key,
+	Data = $1.${3:grouped-attribute}
+})
+endsnippet
+
 # I never remember the order of inputs to Aggregate and for some reason the
 # msdn page has low pagerank.
 # $3 is necessary if your result is a different type from your list.
