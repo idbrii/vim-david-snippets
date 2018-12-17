@@ -1,37 +1,37 @@
 global !p
 def _search_and_return_first_group_from_regex(regex):
-    for line in snip.buffer:
-        match = regex.match(line)
-        if match:
-            return match.group(1)
-    return None
+	for line in snip.buffer:
+	    match = regex.match(line)
+	    if match:
+	        return match.group(1)
+	return None
 
 
 def get_lua_classname():
-    # class.lua
-    tablename = _search_and_return_first_group_from_regex(re.compile("local (\w*) = Class"))
-    invoker = ':'
-    if not tablename:
-        # Table-scoped functions.
-        tablename = _search_and_return_first_group_from_regex(re.compile("local ("+ snip.basename +") = ", re.IGNORECASE))
-        invoker = '.'
-    if not tablename:
-        # No scope for functions -- dump in global namespace.
-        tablename = ''
-        invoker = ''
-    return tablename, invoker
+	# class.lua
+	tablename = _search_and_return_first_group_from_regex(re.compile("local (\w*) = Class"))
+	invoker = ':'
+	if not tablename:
+	    # Table-scoped functions.
+	    tablename = _search_and_return_first_group_from_regex(re.compile("local ("+ snip.basename +") = ", re.IGNORECASE))
+	    invoker = '.'
+	if not tablename:
+	    # No scope for functions -- dump in global namespace.
+	    tablename = ''
+	    invoker = ''
+	return tablename, invoker
 
 # Not shareable. Only exists to extract parsing from snippet.
 def _fun_make_lua_parentcall(klass, t):
-    if not klass:
-        return ''
-    args = t[2]
-    if len(args) > 0:
-        args = ', '+ args
-    return "{klass}._base.{function}(self{args})".format(
-        klass=klass,
-        function=t[1],
-        args=args)
+	if not klass:
+	    return ''
+	args = t[2]
+	if len(args) > 0:
+	    args = ', '+ args
+	return "{klass}._base.{function}(self{args})".format(
+	    klass=klass,
+	    function=t[1],
+	    args=args)
 endglobal
 
 snippet cv "Initialize a private member variable (in ctor)" b
@@ -97,7 +97,7 @@ function `!p
 klass, invoker = get_lua_classname()
 snip.rv = klass + invoker
 `${1:new_function}(${2:args})
-    `!p snip.rv = _fun_make_lua_parentcall(klass, t) `$0
+	`!p snip.rv = _fun_make_lua_parentcall(klass, t) `$0
 end
 endsnippet
 
@@ -112,8 +112,8 @@ endsnippet
 snippet inject "Inject code around an existing function" b
 local old_$1 = ${2:object name}.${1:function name}
 $2.$1 = function(${3:self}$4)
-    old_$1($3$4)
-    $5
+	old_$1($3$4)
+	$5
 end
 endsnippet
 
@@ -134,17 +134,17 @@ function ${1:`!p
 klass, invoker = get_lua_classname()
 snip.rv = klass
 `}:DebugDraw_AddSection(dbui, panel)
-    $1._base.DebugDraw_AddSection(self, dbui, panel)
+	$1._base.DebugDraw_AddSection(self, dbui, panel)
 
 local TheUI = nil -- Use this global for local hacks to avoid changing function signatures.
-    TheUI = dbui
+	TheUI = dbui
 
-    dbui.Spacing()
-    dbui.Text("$1")
-    dbui.Indent() do
-        $0
-    end
-    dbui.Unindent()
+	dbui.Spacing()
+	dbui.Text("$1")
+	dbui.Indent() do
+		$0
+	end
+	dbui.Unindent()
 end
 endsnippet
 
@@ -160,7 +160,7 @@ dbui.Begin("${1:`!p
 klass, invoker = get_lua_classname()
 snip.rv = klass
 `}") do
-    self.${2:widget}:DebugDraw_AddSection(dbui, panel)
+	self.${2:widget}:DebugDraw_AddSection(dbui, panel)
 end
 dbui.End()
 endsnippet

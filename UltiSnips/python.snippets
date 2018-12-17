@@ -49,26 +49,26 @@ snippet !fun|def! "function with docstrings" br
 def ${1:function}(`!p
 
 def get_args(arglist):
-    """Copied verbatim from UltiSnips/python.snippets"""
-    args = [arg.split('=')[0].strip() for arg in arglist.split(',') if arg]
-    args = [arg for arg in args if arg and arg != "self"]
-    return args
+	"""Copied verbatim from UltiSnips/python.snippets"""
+	args = [arg.split('=')[0].strip() for arg in arglist.split(',') if arg]
+	args = [arg for arg in args if arg and arg != "self"]
+	return args
 
 if snip.indent:
-   snip.rv = 'self' + (", " if len(t[2]) else "")`${2:args}):
+	snip.rv = 'self' + (", " if len(t[2]) else "")`${2:args}):
 	"""${3:@todo: Docstring for $1}
 
-    $1(${4:`!p
+	$1(${4:`!p
 args = get_args(t[2])
 
 arg_types = ""
 if args:
-   arg_types = "_type, ".join(args)
-   arg_types += "_type"
+	arg_types = "_type, ".join(args)
+	arg_types += "_type"
 
 snip.rv = arg_types
 `}) -> ${5:return_type}
-    """
+	"""
 	${0:pass}
 endsnippet
 

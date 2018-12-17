@@ -93,13 +93,13 @@ snippet compiler "Create a compiler script" b
 " Last Change:	`!v strftime("%Y-%m-%d")`
 
 if exists("current_compiler")
-  " TODO: uncomment
-  "finish
+	" TODO: uncomment
+	"finish
 endif
 let current_compiler = "$1"
 
 if exists(":CompilerSet") != 2		" older Vim always used :setlocal
-  command -nargs=* CompilerSet setlocal <args>
+	command -nargs=* CompilerSet setlocal <args>
 endif
 
 let s:cpo_save = &cpo
@@ -110,16 +110,16 @@ set cpo-=C
 
 " TODO: update the errorformat
 CompilerSet errorformat=$0
-            \%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,
-            \%Z\ \ \ \ %m
+			\%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,
+			\%Z\ \ \ \ %m
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
 
 " TODO: Remove this block. It's for testing with Autosource.
 if &ft =~ 'vim'
-  cgetfile ~/${2:logfile.log}
-  copen
+	cgetfile ~/${2:logfile.log}
+	copen
 endif
 
 " vim:set sw=2 sts=2:
