@@ -6,7 +6,7 @@ endglobal
 # (causes nested snippet insertion).
 clearsnippets sim
 # Remove unused and unintuitive snippets from vim-snippets.
-clearsnippets svm da cw cwp
+clearsnippets svm da cw cwp mth
 
 snippet debugname "A class attribute to rename type in debugger watch window" b
 [System.Diagnostics.DebuggerDisplay("name = {${1:variable name}}")]
@@ -116,6 +116,13 @@ if snip.v.text:
 else:
 	snip += ""
 `$0
+}
+endsnippet
+
+snippet fun "Function" b
+${1:public} ${2:void} ${3:Method}(${4})
+{
+	$0
 }
 endsnippet
 
