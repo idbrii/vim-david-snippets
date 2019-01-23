@@ -9,7 +9,7 @@ def _search_and_return_first_group_from_regex(regex):
 
 def get_lua_classname():
 	# class.lua
-	tablename = _search_and_return_first_group_from_regex(re.compile("local (\w*) = Class"))
+	tablename = _search_and_return_first_group_from_regex(re.compile("local (\w*) = [cC]lass"))
 	invoker = ':'
 	if not tablename:
 	    # Table-scoped functions.
