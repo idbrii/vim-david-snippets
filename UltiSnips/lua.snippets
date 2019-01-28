@@ -1,9 +1,9 @@
 global !p
 def _search_and_return_first_group_from_regex(regex):
 	for line in snip.buffer:
-	    match = regex.match(line)
-	    if match:
-	        return match.group(1)
+		match = regex.match(line)
+		if match:
+			return match.group(1)
 	return None
 
 
@@ -12,26 +12,26 @@ def get_lua_classname():
 	tablename = _search_and_return_first_group_from_regex(re.compile("local (\w*) = [cC]lass"))
 	invoker = ':'
 	if not tablename:
-	    # Table-scoped functions.
-	    tablename = _search_and_return_first_group_from_regex(re.compile("local ("+ snip.basename +") = ", re.IGNORECASE))
-	    invoker = '.'
+		# Table-scoped functions.
+		tablename = _search_and_return_first_group_from_regex(re.compile("local ("+ snip.basename +") = ", re.IGNORECASE))
+		invoker = '.'
 	if not tablename:
-	    # No scope for functions -- dump in global namespace.
-	    tablename = ''
-	    invoker = ''
+		# No scope for functions -- dump in global namespace.
+		tablename = ''
+		invoker = ''
 	return tablename, invoker
 
 # Not shareable. Only exists to extract parsing from snippet.
 def _fun_make_lua_parentcall(klass, t):
 	if not klass:
-	    return ''
+		return ''
 	args = t[2]
 	if len(args) > 0:
-	    args = ', '+ args
+		args = ', '+ args
 	return "{klass}._base.{function}(self{args})".format(
-	    klass=klass,
-	    function=t[1],
-	    args=args)
+		klass=klass,
+		function=t[1],
+		args=args)
 endglobal
 
 snippet cv "Initialize a private member variable (in ctor)" b
