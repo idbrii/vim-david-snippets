@@ -32,14 +32,14 @@ void Start() {
 endsnippet
 
 snippet collision "Unity: Collision response for hitting something" b
-void OnCollision${1:Enter/Stay/Exit}${2:2D}(Collision$2 ${3:victim})
+void OnCollision${1:Enter/Stay/Exit}${2:2D}(Collision$2 ${3:hit})
 {
 	$3.gameObject$4;
 }
 endsnippet
 
 snippet trigger "Unity: Collision response for overlapping with something" b
-void OnTrigger${1:Enter/Stay/Exit}${2:2D}(Collider$2 ${3:victim})
+void OnTrigger${1:Enter/Stay/Exit}${2:2D}(Collider$2 ${3:instigator})
 {
 	$3.gameObject$4;
 }
