@@ -41,6 +41,21 @@ with ${1:expr} as ${2:var}:
 	${3:${VISUAL:# code...}}
 endsnippet
 
+snippet walk "A directory walk"
+for dirpath,dirs,files in os.walk(${1:root}${2:, topdown=True}${3:, onerror=${4:fn(OSError)}}):
+	for ${5:dir} in $5s:
+		path = os.path.join(dirpath, $5)${7:`!p
+if len(t[2]) > 0:
+	# Show that you can edit 'dirs'
+	snip.shift(3)
+	snip.rv  = '\n' + snip.mkline('if True:')
+	snip.rv += '\n' + snip.mkline('dirs[:] = dirs[0:5]')
+else:
+	snip.rv = ''
+`}
+		$6
+endsnippet
+
 # Don't use the UltiSnip version of def (which works great for sphinx or
 # doxygen, but I use neither).
 clearsnippets def
