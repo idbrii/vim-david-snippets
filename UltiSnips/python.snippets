@@ -43,7 +43,7 @@ endsnippet
 
 snippet walk "A directory walk"
 for dirpath,dirs,files in os.walk(${1:root}${2:, topdown=True}${3:, onerror=${4:fn(OSError)}}):
-	for ${5:dir} in $5s:
+	for ${5:directory} in $5s:
 		path = os.path.join(dirpath, $5)${7:`!p
 if len(t[2]) > 0:
 	# Show that you can edit 'dirs'
