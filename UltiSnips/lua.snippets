@@ -109,6 +109,18 @@ snippet !(\S|=\s*)fun(ction)?! "Anonymous function" r
 end
 endsnippet
 
+snippet cl "Gabe class"
+local class = require 'gabe.class'
+
+local ${1:`!p snip.rv = snip.basename.capitalize()`} = class('`!p snip.rv = t[1].lower()`')
+
+function $1:init(${2:x,y})
+	$3
+end
+
+return $1
+endsnippet
+
 snippet inject "Inject code around an existing function" b
 local old_$1 = ${2:object name}.${1:function name}
 $2.$1 = function(${3:self}$4)
