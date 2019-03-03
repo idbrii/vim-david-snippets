@@ -141,6 +141,11 @@ end
 dbui.End()
 endsnippet
 
+# Standard lua stack trace
+snippet trace "Insert stack trace" b
+print("`!v g:snips_author`", debug.traceback("breakpoint: ${1:msg}"))
+endsnippet
+
 snippet debugdraw "Add a child's imgui draw section" b
 function ${1:`!p
 klass, invoker = get_lua_classname()
