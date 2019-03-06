@@ -7,6 +7,8 @@ endglobal
 clearsnippets sim
 # Remove unused and unintuitive snippets from vim-snippets.
 clearsnippets svm da cw cwp mth
+# Remove snippets where I have my own implementation.
+clearsnippets prop propfull propg
 
 snippet debugname "A class attribute to rename type in debugger watch window" b
 [System.Diagnostics.DebuggerDisplay("name = {${1:variable name}}")]
@@ -123,6 +125,23 @@ snippet fun "Function" b
 ${1:public} ${2:void} ${3:Method}(${4})
 {
 	$0
+}
+endsnippet
+
+snippet get "Auto property declaration" b
+${3:public} ${1:int} ${2:Property} { get; ${4:private }set; }
+endsnippet
+
+snippet get "Manual property declaration" b
+$1 m_$2;
+${3:public} ${1:int} ${2:Property}
+{
+	get {
+		${5:return m_$2;}
+	}
+	${4:private }set {
+		m_$2 = value;
+	}
 }
 endsnippet
 
