@@ -80,9 +80,13 @@ endsnippet
 
 snippet augroup "Define an augroup"
 augroup ${1:AU_NAME}
-	" this one is which you're most likely to use?
-	autocmd ${2:BufRead,BufNewFile} ${3:*.ext,*.ext3|<buffer[=N]>} ${4}
-augroup end${5}
+	au!
+	autocmd ${2:BufRead,BufNewFile} ${3:*.ext,*.ext3|<buffer[=N]>} ${4:call ...}
+augroup END${5}
+endsnippet
+
+snippet cmd "Define a command" b
+command ${3:-buffer }${4:-nargs=${5:*} }   ${1:Name} ${2:call Action(<f-args>)}
 endsnippet
 
 snippet compiler "Create a compiler script" b
