@@ -80,19 +80,14 @@ endsnippet
 
 snippet augroup "Define an augroup"
 augroup ${1:au_name}
-	au!
-	autocmd ${2:BufRead,BufNewFile} ${3:*.ext,*.ext3|<buffer[=N]>} ${4:call ...}
-augroup END${5}
-endsnippet
-
-# If you want to clear <buffer> autocmds, but only for the current buffer, you
-# need a buffer-local augroup. Otherwise au! will clear for other buffers.
-snippet baugroup "Define a buffer-local augroup"
-exec 'augroup ${1:au_prefix}-'. bufnr('%')
-	au!
-	autocmd ${2:BufEnter} <buffer> ${3:call ...}
-	autocmd ${4:BufLeave} <buffer> ${5:call ...}
-exec 'augroup END'
+	au!`!p
+if t[3] == '<buffer>':
+  snip.rv = ' * <buffer>'
+else:
+  snip.rv = ''
+`
+	autocmd ${2:BufRead,BufNewFile} ${3:<buffer>} ${4:call ...}$0
+augroup END
 endsnippet
 
 snippet cmd "Define a command" b
