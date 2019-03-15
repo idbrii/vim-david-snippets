@@ -8,7 +8,7 @@ def _search_and_return_first_group_from_regex_before_current_line(regex):
         match = regex.match(line)
         if match:
             return match.groups()
-    return None
+    return None, None
 
 def _search_and_return_first_group_from_regex(regex):
     for line in vim.current.window.buffer:
