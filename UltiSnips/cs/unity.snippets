@@ -149,9 +149,12 @@ using UnityEngine;
 
 using Object = UnityEngine.Object;
 
-public class ${1:`!p snip.rv = snip.basename`} : MonoBehaviour
+namespace ${2:`!p snip.rv = guess_namespace()`}
 {
-$0
+	public class ${1:`!p snip.rv = snip.basename`} : MonoBehaviour
+	{
+		$0
+	}
 }
 endsnippet
 
@@ -164,19 +167,22 @@ using UnityEngine;
 
 using Object = UnityEngine.Object;
 
-[CreateAssetMenu(fileName = "$1", menuName = "`!p
-# where it appears in the right click menu. Use company name as a folder to
-# group our stuff away from built-in.
+namespace ${2:`!p snip.rv = guess_namespace()`}
+{
+	[CreateAssetMenu(fileName = "$1", menuName = "`!p
+	# where it appears in the right click menu. Use company name as a folder to
+	# group our stuff away from built-in.
 snip.rv = "{group}/{cmd}".format(
 	group = vim.vars['snips_company'].decode("utf-8"),
 	cmd = t[1])
 `", order = 1)]
-public class ${1:`!p snip.rv = snip.basename`} : ScriptableObject
-{
-	void Awake()
+	public class ${1:`!p snip.rv = snip.basename`} : ScriptableObject
 	{
-	}
+		void Awake()
+		{
+		}
 $0
+	}
 }
 endsnippet
 
@@ -191,25 +197,28 @@ using UnityEngine;
 
 using Object = UnityEngine.Object;
 
-public class ${1:`!p snip.rv = snip.basename`} : EditorWindow
+namespace ${2:`!p snip.rv = guess_namespace('Editors')`}
 {
-	[MenuItem("${2:Tools/$1}")]
-	static void ShowToolbar()
+	public class ${1:`!p snip.rv = snip.basename`} : EditorWindow
 	{
-		EditorWindow.GetWindow<$1>("$1");
-	}
-
-
-	private Vector2 scroll;
-	public void OnGUI()
-	{
-		scroll = EditorGUILayout.BeginScrollView(scroll);
+		[MenuItem("${3:Tools/$1}")]
+		static void ShowToolbar()
 		{
-			${3:content}
+			EditorWindow.GetWindow<$1>("$1");
 		}
-		EditorGUILayout.EndScrollView();
-	}
 
+
+		private Vector2 scroll;
+		public void OnGUI()
+		{
+			scroll = EditorGUILayout.BeginScrollView(scroll);
+			{
+				${4:content}
+			}
+			EditorGUILayout.EndScrollView();
+		}
+
+	}
 }
 endsnippet
 
@@ -221,7 +230,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace ${1:Editors}
+namespace `!p snip.rv = guess_namespace('Editors')`
 {
 	[CustomEditor(typeof(${2:`!p
 suffix = "_Editor"
@@ -264,7 +273,7 @@ using UnityEditor;
 #endif
 
 // This class should *not* live in Editor unless it can only decorate Editor classes!
-namespace Game.Inspector
+namespace `!p snip.rv = guess_namespace('Inspector')`
 {
 
 	// Defines an attribute that ${2}

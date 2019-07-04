@@ -1,3 +1,4 @@
+import os
 import re
 import vim
 
@@ -32,3 +33,13 @@ def has_access_to_unityobject():
         valid_this = ['MonoBehaviour', 'ScriptableObject']
         return any([p_class in parent for p_class in valid_this])
     return False
+
+
+def guess_namespace(hint=None):
+    top = vim.eval('g:snips_company')
+    if hint:
+        folder = hint
+    else:
+        folder = os.path.basename(os.path.dirname(vim.current.buffer.name))
+    return "{top}.{folder}".format(top=top, folder=folder)
+
