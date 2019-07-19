@@ -45,11 +45,18 @@ ${0}
 #endif /* $1 */
 endsnippet
 
-# If Condition
-snippet if "if"
-if (${1:/* condition */}) {
-	${2:/* code */}
-}${3}
+snippet if "if statement" "vim.eval('@0')" be
+if (${1:`!p
+# use context to capture initial register value
+snip.rv = snip.context`}) {
+	${VISUAL}$2
+}
+endsnippet
+
+snippet else "else statement" b
+else {
+	${VISUAL}$1
+}
 endsnippet
 
 # Do While Loop

@@ -51,10 +51,12 @@ snippet '=\s*\"' "multi-line string" r
 ]]
 endsnippet
 
-snippet if "If statement" b
-if ${1:condition} then
-	${VISUAL}
-end
+snippet /(else)?if/ "if statement" "vim.eval('@0')" bre
+`!p snip.rv = match.group(0)` ${1:`!p
+# use context to capture initial register value
+snip.rv = snip.context`} then
+	${VISUAL}$2
+${3:end}
 endsnippet
 
 # I don't like the vim-snippets version of for because I want some consistency

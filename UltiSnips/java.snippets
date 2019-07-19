@@ -131,12 +131,18 @@ default:
 	${2}
 endsnippet
 
-snippet elif "elif"
-else if (${1}) ${2}
+snippet if "if statement" "vim.eval('@0')" be
+if (${1:`!p
+# use context to capture initial register value
+snip.rv = snip.context`}) {
+	${VISUAL}$2
+}
 endsnippet
 
-snippet if "if"
-if (${1}) ${2}
+snippet else "else statement" b
+else {
+	${VISUAL}$1
+}
 endsnippet
 
 snippet sw "sw"
