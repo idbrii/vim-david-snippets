@@ -100,6 +100,22 @@ foreach (${3:var} ${2:entry} in ${1:items})
 }
 endsnippet
 
+snippet if "if statement" "vim.eval('@0')" be
+if (${1:`!p
+# use context to capture initial register value
+snip.rv = snip.context`})
+{
+	${VISUAL}$2
+}
+endsnippet
+
+snippet else "else statement" b
+else
+{
+	${VISUAL}$1
+}
+endsnippet
+
 snippet ifdef "ifdef"
 #if ${1:SYMBOL}
 ${2:${VISUAL:#define }}$0
