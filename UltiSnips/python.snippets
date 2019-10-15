@@ -183,6 +183,23 @@ snippet pprint "pprint"
 import pprint; pprint.pprint(${1})${2}
 endsnippet
 
+# As you type comma-separated parameters on the right, {n} values appear in the
+# format string.
+# TODO: Add support for {key} and key=value.
+snippet fmt "String format" w
+"${2:`!p
+snip.rv = ' '.join(['{}' for i,k in enumerate(t[1].split(','))])
+	`}".format(${1:${VISUAL:data}})
+endsnippet
+
+# As you type comma-separated parameters on the right, val={n} values appear in
+# the format string.
+snippet dump "String format: dump out data" w
+"${2:`!p
+snip.rv = ' '.join([k.strip() +'={}' for i,k in enumerate(t[1].split(','))])
+	`}".format(${1:${VISUAL:data}})
+endsnippet
+
 # Limit quote as snippet to specific scenarios (first nonblank or
 # following equals) so it's not accidentially expanded within other
 # snippets.
