@@ -86,6 +86,38 @@ snippet log "Debug print" b
 print("`!v g:snips_author`:", ${1:"$2"}$3)
 endsnippet
 
+snippet dump "String format: dump out data" w
+print("${1:${VISUAL:data}}`!p
+text = t[1]
+if text[-1] == '=':
+	prev = text.rfind('"')
+	if prev == -1:
+		prev = 0
+	else:
+		prev += 1
+	text += ' ", '+ text[prev:-1] +', "'
+	t[1] = text
+`")
+endsnippet
+
+#~ # TODO: Would be cleaner to just insert a list and it prepends the string part.
+#~ snippet dump "String format: dump out data" w
+#~ print(${1:${VISUAL:data}}`!p
+#~ text = t[1]
+#~ if text[-1] == ',':
+#~ 	end = text.rfind(',')
+#~ 	if end == -1:
+#~ 		prev = ''
+#~ 		end = 0
+#~ 	else:
+#~ 		prev = text[:end]
+#~ 		end += 1
+#~ 	#~ text = prev +'"{v} = ", {v}, '.format(v=text[end:-1])
+#~ 	text = prev +'{v}, {v},'.format(v=text[end:-1])
+#~ 	t[1] = text
+#~ `)
+#~ endsnippet
+
 snippet = "Assignment / increment / decrement" b
 ${1:${VISUAL:variable}} = $1 ${2:+} ${3:1}
 endsnippet
