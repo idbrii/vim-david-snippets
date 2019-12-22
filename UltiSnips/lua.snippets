@@ -156,6 +156,11 @@ end
 return $1
 endsnippet
 
+snippet pretty "pretty print something" b
+local pretty = require "pl.pretty"
+pretty.dump(${1:${VISUAL}})
+endsnippet
+
 snippet inject "Inject code around an existing function" b
 local old_$1 = ${2:object name}.${1:function name}
 $2.$1 = function(${3:self}$4)
