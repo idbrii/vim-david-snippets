@@ -57,7 +57,7 @@ snippet nullclear "Resetting a variable"
 if (${1:var} != null) {
 	$1.${2}
 	$1 = null;
-}${3}
+}$0
 endsnippet
 
 ##
@@ -136,15 +136,13 @@ if (${1:`!p
 # use context to capture initial register value
 snip.rv = snip.context.strip()`}) {
 	${VISUAL}$2
-}
-$0
+}$0
 endsnippet
 
 snippet else "else statement" b
 else {
 	${VISUAL}$1
-}
-$0
+}$0
 endsnippet
 
 snippet sw "sw"

@@ -56,8 +56,7 @@ snippet /(else)?if/ "if statement" "vim.eval('@0')" bre
 # use context to capture initial register value
 snip.rv = snip.context.strip()`} then
 	${VISUAL}$2
-${3:end}
-$0
+${3:end}$0
 endsnippet
 
 # I don't like the vim-snippets version of for because I want some consistency
