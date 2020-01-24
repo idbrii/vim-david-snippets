@@ -7,9 +7,10 @@ ${4:pub }fn ${1:function_name}($2)${3/..*/ -> /}$3 {
 }
 endsnippet
 
-snippet st "Struct with new constructor"
+# TODO: This filename is always blank?
+snippet /st|cl/ "Struct with new constructor" br
 pub struct ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`} {
-	${0}
+	$0
 }
 
 impl $1 {
