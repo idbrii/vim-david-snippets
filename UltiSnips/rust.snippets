@@ -78,3 +78,13 @@ loop {
 }
 endsnippet
 
+clearsnippets pln fmt
+
+snippet log "println!(..)"
+println!("$1"${2/..*/, /}$2);
+endsnippet
+
+snippet fmt "print with format!(..)"
+format!("$1"${2/..*/, /}$2);
+endsnippet
+
