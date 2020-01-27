@@ -73,19 +73,33 @@ while ${1:condition} {
 }
 endsnippet
 
-snippet loop "loop {}" b
+snippet loop "unconditional loop" b
 loop {
 	${0:${VISUAL}}
 }
 endsnippet
 
-clearsnippets pln fmt
+clearsnippets pln
 
-snippet log "println!(..)"
-println!("$1"${2/..*/, /}$2);
+snippet log "println"
+println!("$1"`!p
+if t[1].count(r"{}") > 0:
+	snip.rv = ", "
+else:
+	snip.rv = ""
+`$2);
 endsnippet
 
-snippet fmt "print with format!(..)"
-format!("$1"${2/..*/, /}$2);
+snippet dump "dump variables into format string"
+format!("`!p
+snip.rv = ' '.join([k.strip() + '={}' for i,k in enumerate(t[1].split(','))])
+`", ${1:${VISUAL:data}})
+endsnippet
+
+# Fill in variables we want. vim-snippets version is more left to right.
+snippet fmt "format string"
+format!("$2`!p
+snip.rv = ' '.join(['{}' for i,k in enumerate(t[1].split(','))])
+`", ${1:${VISUAL:data}})
 endsnippet
 
