@@ -1,3 +1,8 @@
+global !p
+import snip_common
+
+endglobal
+
 
 clearsnippets fn pfn
 
@@ -7,9 +12,10 @@ ${4:pub }fn ${1:function_name}($2)${3/..*/ -> /}$3 {
 }
 endsnippet
 
-# TODO: This filename is always blank?
 snippet /st|cl/ "Struct with new constructor" br
-pub struct ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`} {
+pub struct ${1:`!p
+snip.rv = snip_common.basename_to_mixed_case(snip.basename)
+`} {
 	$0
 }
 
@@ -41,7 +47,7 @@ else {
 endsnippet
 
 # Create structure and then setup for another expansion.
-snippet mat "pattern match" "vim.eval('@0')" be
+snippet /mat|sw/ "pattern match" "vim.eval('@0')" bre
 match ${1:`!p
 # use context to capture initial register value
 snip.rv = snip.context.strip()`} {
