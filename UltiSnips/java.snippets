@@ -276,37 +276,45 @@ endsnippet
 ##
 ## Loops
 snippet for "Iterable for-each loop"
-for (${1} : ${2}) ${3}
+for (${1} : ${2}) {
+	${3:${VISUAL}}
+}
 endsnippet
 
 snippet forloop "Custom c-style for-loop"
-for (${1}; ${2}; ${3}) ${4}
+for (${1}; ${2}; ${3}) {
+	${4:${VISUAL}}
+}
 endsnippet
 
 snippet fo "Indexed for-loop"
-for (int ${2:i} = 0; $2 < ${1:count}; ++$2) ${3}
+for (int ${2:i} = 0; $2 < ${1:count}; ++$2) {
+	${3:${VISUAL}}
+}
 endsnippet
 
 snippet wh "wh"
-while (${1}) ${2}
+while (${1}) {
+	${2:${VISUAL}}
+}
 endsnippet
 
 ##
 ## Main method
 snippet main "main"
 public static void main (String[] args) {
-	${1:/* code */}
+	${1:${VISUAL}}
 }
 endsnippet
 
 ##
 ## Print Methods
 snippet print "print"
-System.out.print("${1:Message");
+System.out.print("${1:Message}");
 endsnippet
 
 snippet printf "printf"
-System.out.printf("${1:Message", ${2:args});
+System.out.printf("${1:Message}", ${2:args});
 endsnippet
 
 snippet println "println"

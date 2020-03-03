@@ -1,7 +1,7 @@
 # quick matching braces
 snippet { "{"
 {
-	${1}
+	${1:${VISUAL}}
 }
 endsnippet
 
@@ -9,7 +9,7 @@ endsnippet
 snippet main "main"
 int main(${1:int argc, const char *argv[]})
 {
-	${2}
+	${2:${VISUAL}}
 	return 0;
 }
 endsnippet
@@ -40,7 +40,7 @@ snippet guard "Preprocessor include header" b
 #ifndef ${1:`!p snip.rv = snip.basename.upper() + '_H'`}
 #define $1
 
-${0}
+${2:${VISUAL}}
 
 #endif /* $1 */
 endsnippet
@@ -64,31 +64,37 @@ endsnippet
 # Do While Loop
 snippet do "do"
 do {
-	${2:/* code */}
+	${2:${VISUAL}}
 } while (${1:/* condition */});${3}
 endsnippet
 
 # While Loop
 snippet wh "wh"
 while (${1:/* condition */}) {
-	${2:/* code */}
+	${2:${VISUAL}}
 }${3}
 endsnippet
 
 # For Loop
 snippet fo "Indexed for-loop"
-for (int ${2:i} = 0; $2 < ${1:count}; ++$2) ${3}
+for (int ${2:i} = 0; $2 < ${1:count}; ++$2)
+{
+	${3:${VISUAL}}
+}
 endsnippet
 
 snippet for "Custom for-loop"
-for (${1}; ${2}; ${3}) ${4}
+for (${1}; ${2}; ${3})
+{
+	${4:${VISUAL}}
+}
 endsnippet
 
 # Function
 snippet fun "fun"
 ${1:void} ${2:function_name}(${3})
 {
-	${4:/* code */}
+	${4:${VISUAL}}
 }${5}
 endsnippet
 
