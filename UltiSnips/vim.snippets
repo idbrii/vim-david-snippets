@@ -2,11 +2,15 @@ snippet append "Add item to array" b
 call add(${1:${VISUAL:list}}, ${2:entry})
 endsnippet
 
-snippet bak "Backup an option" b
-let $1_bak = &${1:${VISUAL:option}}
-let &$1 = ${2:value}
-$0
-let &$1 = $1_bak
+snippet bak "Backup an option" "vim.eval('@0')" be
+let $2_bak = ${1:&}${2:`!p
+# use context to capture initial register value
+snip.rv = snip.context.strip()`}
+let $1$2 = ${3:value}
+
+${VISUAL}
+
+let $1$2 = $2_bak
 endsnippet
 
 snippet win "Save window layout" b
