@@ -28,10 +28,11 @@ def _fun_make_lua_parentcall(klass, t):
 	args = t[2]
 	if len(args) > 0:
 		args = ', '+ args
-	return "{klass}._base.{function}(self{args})".format(
+	fn = "{klass}._base.{function}(self{args})".format(
 		klass=klass,
 		function=t[1],
 		args=args)
+	return snip.mkline(fn)
 endglobal
 
 snippet cv "Initialize a private member variable (in ctor)" b
@@ -130,8 +131,15 @@ snippet !fun(ction)?! "New (member) function" br
 function `!p
 klass, invoker = get_lua_classname()
 snip.rv = klass + invoker
-`${1:new_function}(${2:args})
-	`!p snip.rv = _fun_make_lua_parentcall(klass, t) `$0
+`${1:new_function}(${2:args})`!p
+if not snip.c:
+	snip.shift(1 + int(vim.eval('indent(".")/&shiftwidth')))
+	line = _fun_make_lua_parentcall(klass, t)
+	if line:
+		line = "\n" + line
+	snip.rv = line
+`
+	${3:${VISUAL}}$4
 end
 endsnippet
 
