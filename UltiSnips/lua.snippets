@@ -163,9 +163,9 @@ end
 return $1
 endsnippet
 
-snippet pretty "pretty print something" b
+snippet /pr(etty)?/ "pretty print something" br
 local pretty = require "pl.pretty"
-pretty.dump(${1:${VISUAL}})
+print("`!v g:snips_author`:", "\n", pretty.write(${1:${VISUAL}}))
 endsnippet
 
 snippet inject "Inject code around an existing function" b
