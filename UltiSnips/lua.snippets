@@ -151,13 +151,24 @@ snippet !(\S|=\s*)fun(ction)?! "Anonymous function" r
 end
 endsnippet
 
+# Using double quotes here because inclement uses double quotes.
 snippet cl "Gabe class"
-local class = require 'gabe.class'
+local class = require "gabe.class"
+`!p
+# Only import transform if we're going to use it.
+if t[3]:
+	snip.rv = 'local transform = require "system.transform"'
+else:
+	snip.rv = ''
+`
+
 
 local ${1:`!p snip.rv = snip.basename.capitalize()`} = class('`!p snip.rv = t[1].lower()`')
 
 function $1:init(${2:x,y})
-	$3
+	${3:self.name = '`!p snip.rv = t[1].lower()`'
+	self.transform = transform.create_component(x,y)}
+	$4
 end
 
 return $1
