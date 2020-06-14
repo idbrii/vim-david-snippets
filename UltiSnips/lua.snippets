@@ -174,6 +174,7 @@ end
 return $1
 endsnippet
 
+# Quick insert pretty print for debugging, not committing.
 snippet /pr(etty)?/ "pretty print something" br
 local pretty = require "pl.pretty"
 print("`!v g:snips_author`:", "\n", pretty.write(${1:${VISUAL}}))

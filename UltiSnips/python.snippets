@@ -179,8 +179,15 @@ snippet pdbbb "pdb++ debugger (pdbpp)"
 import pdbpp; pdbpp.set_trace()
 endsnippet
 
-snippet /pp(rint)?/ "pprint" br
+# Quick insert pretty print for debugging, not committing.
+snippet /pr(etty)?/ "pprint" br
 import pprint; pprint.pprint(${1})${2}
+endsnippet
+
+# What about the logging module? I don't use it often enough to bother right
+# now.
+snippet log "Log a message" w
+print($1)
 endsnippet
 
 # As you type comma-separated parameters on the right, {n} values appear in the
