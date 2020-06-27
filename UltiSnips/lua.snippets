@@ -83,7 +83,7 @@ end
 endsnippet
 
 snippet log "Debug print" b
-print("`!v g:snips_author`:", ${1:"$2"}$3)
+print("`!v g:snips_author`", ${1:"$2"}$3)
 endsnippet
 
 snippet dump "String format: dump out data" w
@@ -177,7 +177,7 @@ endsnippet
 # Quick insert pretty print for debugging, not committing.
 snippet /pr(etty)?/ "pretty print something" br
 local pretty = require "pl.pretty"
-print("`!v g:snips_author`:", "\n", pretty.write(${1:${VISUAL}}))
+print("`!v g:snips_author` = ", "\n", pretty.write(${1:${VISUAL}}))
 endsnippet
 
 snippet inject "Inject code around an existing function" b
