@@ -127,7 +127,7 @@ endsnippet
 # when they're inserted later, so to get the base call line to work, we don't
 # allow classname customization.
 # TODO(dbriscoe): If I can't find a class definition, can I omit the classname? (How?)
-snippet !fun(ction)?! "New (member) function" br
+snippet /fun(ction)?/ "Member function" br!
 function `!p
 klass, invoker = get_lua_classname()
 snip.rv = klass + invoker
@@ -143,8 +143,8 @@ if not snip.c:
 end
 endsnippet
 
-# Similar to vim-snippets, but requires a preceeding word
-snippet !(\S|=\s*)fun(ction)?! "Anonymous function" r
+# Similar to vim-snippets, but requires a preceeding word.
+snippet /(\S\s*)fun(ction)?/ "Anonymous function" r
 `!p snip.rv = match.group(1)
 `function(${2:args})
 	$0
