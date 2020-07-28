@@ -121,6 +121,16 @@ snippet cmd "Define a command" b
 command ${3:-buffer }${4:-nargs=${5:*} }   ${1:Name} ${2:call Action(<f-args>)}
 endsnippet
 
+# I always forget that lambdas to map accept key and value (if input is
+# dictionary, then the key is the index).
+snippet map "map() with lambda"
+map(${1:${VISUAL}}, { k,v -> $2 })
+endsnippet
+
+snippet filter "filter() with lambda"
+filter(${1:${VISUAL}}, { k,v -> $2 })
+endsnippet
+
 snippet compiler "Create a compiler script" b
 " Compiler setup for ${1:file_type}
 " For details on creating a compiler file, see ":help write-compiler-plugin".
