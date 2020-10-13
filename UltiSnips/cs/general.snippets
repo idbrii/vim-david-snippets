@@ -26,6 +26,21 @@ snippet append "Merge a list into another List" b
 ${1:${VISUAL:destination}}.AddRange(${2:source});
 endsnippet
 
+snippet /writeback|swap/ "Assign a struct member by copying and writing back" br
+var ${9:`!p
+try:
+	end = t[1].rindex('.')
+	snip.rv = t[1][end + 1:]
+except:
+	if t[1]:
+		snip.rv = t[1][0]
+	else:
+		snip.rv = 'struct'
+`} = ${1:${VISUAL:original}};
+$9.$2 = ${4:value}$5;
+$1 = $9;
+endsnippet
+
 # As you type comma-separated parameters on the right, {n} values appear in the
 # format string.
 snippet fmt "String format" w
