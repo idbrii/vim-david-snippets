@@ -31,6 +31,24 @@ void Start() {
 }
 endsnippet
 
+snippet update "Unity: coroutine-driven update started in OnEnable" b
+void OnEnable()
+{
+	StartCoroutine(Loop());
+}
+
+IEnumerator ${1:Loop}()
+{
+	// Skip first frame to ensure complete creation.
+	yield return null;
+	while (true)
+	{
+		$3
+		yield return new WaitForSeconds($2);
+	}
+}
+endsnippet
+
 snippet collision "Unity: Collision response for hitting something" b
 void OnCollision${1:Enter/Stay/Exit}${2:2D}(Collision$2 ${3:hit})
 {
