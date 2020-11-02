@@ -91,9 +91,8 @@ if has_access_to_unityobject():
 `);$0
 endsnippet
 
-# Requires my Dbg debugging "library".
-snippet assert "Unity: My assert" b
-Dbg.Assert(${1:predicate}, ${2:msg});$0
+snippet assert "Unity: Vanilla assert" b
+Debug.Assert(${1:predicate}, ${2:msg});$0
 endsnippet
 
 snippet stack "Unity: Print a stack trace" b
