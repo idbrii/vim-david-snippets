@@ -109,13 +109,25 @@ endsnippet
 
 snippet debugdraw "Unity: Debug draw to MonoBehaviour" b
 using UnityEditor;
+GUIStyle m_BigTextStyle;
 void OnGUI()
 {
-	GUILayout.BeginVertical();
+	if (m_BigTextStyle == null)
 	{
-		GUILayout.Label(string.Format(${1:"x={0} y={1}", x, y}$0));
+		m_BigTextStyle = new GUIStyle(GUI.skin.label);
+		m_BigTextStyle.fontSize = 40; 
 	}
-	GUILayout.EndVertical();
+
+	GUILayout.Space(20);
+	using(new GUILayout.HorizontalScope())
+	{
+		GUILayout.Space(20f);
+
+		using(new GUILayout.VerticalScope())
+		{
+			GUILayout.Label($"${1:x={x} y={y}}", m_BigTextStyle);
+		}
+	}
 }
 endsnippet
 
