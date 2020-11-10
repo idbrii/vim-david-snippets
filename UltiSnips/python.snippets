@@ -107,9 +107,13 @@ else:
 $0
 endsnippet
 
-# For
-snippet for "for"
+snippet /for(e?)/ "for" r
 for ${1:needle} in ${2:haystack}:
+	${3:${VISUAL}}
+endsnippet
+
+snippet fori "for in range"
+for ${1:i} in range(${2:10}):
 	${3:${VISUAL}}
 endsnippet
 
