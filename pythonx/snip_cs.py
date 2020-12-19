@@ -40,6 +40,18 @@ def guess_namespace(hint=None):
     if hint:
         folder = hint
     else:
-        folder = os.path.basename(os.path.dirname(vim.current.buffer.name))
-    return "{top}.{folder}".format(top=top, folder=folder)
+        current = os.path.normpath(vim.current.buffer.name)
+        i = current.index(os.path.normpath('/Assets/'))
+        project = current[:i]
+        project = os.path.basename(project) 
 
+        specific = os.path.basename(os.path.dirname(current))
+        if specific == 'Scripts':
+            folder = project
+        else:
+            folder = f"{project}.{specific}"
+
+    namespace = "{top}.{folder}".format(top=top, folder=folder)
+    if top.islower():
+        namespace = namespace.lower()
+    return namespace
