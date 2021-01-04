@@ -32,6 +32,36 @@ def basename_to_mixed_case(basename):
     return re.sub("(_+|^)(.)?", _capitalize_group, basename)
 
 
+def guess_type_from_decl(typename, varname):
+    """Guess the name of the type from the inputs.
+
+    typename and varname are match 1 and 3 from regex:
+    /^\s*(\w[^=]+)(\*?) (\S+) = new/
+
+    guess_type_from_decl(str, str) -> str
+    """
+    if typename == 'var':
+        t = varname
+        # m_blah/_blah -> blah
+        t = re.sub(r"^[mk]?_", '', t)
+        if len(t) > 1:
+            t = t[0].upper() + t[1:]
+        # Guess the variable name is close to the typename.
+        # i.e, var list = new List<>
+        list_names = [ 'List', 'Items', 'Elements', ]
+        dict_names = [ 'Dict', 'Map', ]
+        if t in list_names:
+            t = "List<>"
+        elif t in dict_names:
+            t = "Dictionary<>"
+        return t
+    else:
+        # Limited C++ support.
+        t = typename
+        t = re.sub(r"[*].*$", '', t)
+        t = re.sub(r"^const ", '', t)
+        return t
+
 def _test():
     import doctest
     doctest.testmod()

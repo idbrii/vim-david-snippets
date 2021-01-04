@@ -1,3 +1,7 @@
+global !p
+import snip_common as common
+endglobal
+
 # Casts
 snippet cast "Static Cast"
 static_cast<${1}>(${2})${0}
@@ -91,6 +95,14 @@ endsnippet
 
 snippet new "Construction of an object" b
 ${1:Type}* ${2:variable} = new $1(${3:args});
+endsnippet
+
+snippet /^\s*(\w[^=]+)(\*?) (\S+) = new/ "Construction of an object" r
+`!p
+snip.rv = match[0]
+` ${1:`!p
+snip.rv = common.guess_type_from_decl(match[1], match[3])
+`}(${2});
 endsnippet
 
 snippet for "std::iterator for-each loop"

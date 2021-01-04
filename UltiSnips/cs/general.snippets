@@ -1,5 +1,6 @@
 global !p
 import snip_c as c
+import snip_common as common
 endglobal
 
 # Remove unused snippets from vim-snippets that conflict with common words
@@ -22,27 +23,7 @@ snippet /^\s*(\w[^=]+)(\*?) (\S+) = new/ "Construction of an object" r
 `!p
 snip.rv = match[0]
 ` ${1:`!p
-t = match[1]
-# Limited C++ support.
-t = re.sub(r"[*].*$", '', t)
-t = re.sub(r"^const ", '', t)
-if match[1] == 'var':
-	t = match[3]
-	# m_blah/_blah -> blah
-	t = re.sub(r"^[mk]?_", '', t)
-	if len(t) > 1:
-		t = t[0].upper() + t[1:]
-	# Guess the variable name is close to the typename.
-	# i.e, var list = new List<>
-	list_names = [ 'List', 'Items', 'Elements', ]
-	dict_names = [ 'Dict', 'Map', ]
-	if t in list_names:
-		t = "List<>"
-	elif t in dict_names:
-		t = "Dictionary<>"
-	snip.rv = t
-else:
-	snip.rv = t
+snip.rv = common.guess_type_from_decl(match[1], match[3])
 `}(${2});
 endsnippet
 
