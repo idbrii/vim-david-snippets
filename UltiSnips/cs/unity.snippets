@@ -173,11 +173,17 @@ snippet skel "Unity: New MonoBehaviour" b
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
-using System;
+using System;`!p
+if 'ui' in t[2]:
+	snip.rv = '\nusing UnityEngine.UI;'
+`
 using UnityEngine;
 
 using Debug = UnityEngine.Debug;
-using Object = UnityEngine.Object;
+using Object = UnityEngine.Object;`!p
+if 'ui' in t[2]:
+	snip.rv = '\nusing Text = TMPro.TextMeshProUGUI;'
+`
 
 namespace ${2:`!p snip.rv = guess_namespace()`}
 {
