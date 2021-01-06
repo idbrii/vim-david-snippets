@@ -124,6 +124,17 @@ foreach (${3:var} ${2:entry} in ${1:items})
 }
 endsnippet
 
+snippet for2d "for loop for 2d array" b
+for (int ${2:x} = 0; $2 < ${1:array}.GetLength(0); ++$2)
+{
+	for (int ${3:y} = 0; $3 < $1.GetLength(1); ++$3)
+	{
+		var cell = $1[x,y];
+		${VISUAL}$0
+	}
+}
+endsnippet
+
 snippet if "if statement" "vim.eval('@0')" be
 if (${1:`!p
 # use context to capture initial register value
