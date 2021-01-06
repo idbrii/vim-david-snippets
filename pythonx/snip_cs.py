@@ -54,4 +54,5 @@ def guess_namespace(hint=None):
     namespace = "{top}.{folder}".format(top=top, folder=folder)
     if top.islower():
         namespace = namespace.lower()
+    namespace = re.sub('[-]', '', namespace)
     return namespace
