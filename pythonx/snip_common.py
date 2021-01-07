@@ -60,6 +60,7 @@ def guess_type_from_decl(typename, varname):
         t = typename
         t = re.sub(r"[*].*$", '', t)
         t = re.sub(r"^const ", '', t)
+        t = re.sub(r"^(public|internal|protected|private) ", '', t)
         return t
 
 def _test():
