@@ -196,3 +196,13 @@ ${3:public }${1:int} ${2:Property}
 }
 endsnippet
 
+snippet event "Setup a delegate event" b
+public delegate void ${1:Handler}(${3});
+public event $1 ${2:_Event};
+
+// Event can only be invoked from this class or via this function.
+protected virtual void ${4:RaiseEvent}()
+{
+	$2?.Invoke($5$3);
+}
+endsnippet
