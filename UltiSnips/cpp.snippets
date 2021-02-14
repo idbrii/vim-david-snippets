@@ -100,9 +100,20 @@ endsnippet
 snippet /^\s*(\w[^=]+)(\*?) (\S+) = new/ "Construction of an object" r
 `!p
 snip.rv = match[0]
-` ${1:`!p
-snip.rv = common.guess_type_from_decl(match[1], match[3])
-`}(${2});
+` `!p
+txt, is_round_paren = common.guess_type_from_decl(match[1], match[3])
+if is_round_paren:
+	paren = "("
+else:
+	paren = "["
+snip.rv = txt + paren
+`$2`!p
+_, is_round_paren = common.guess_type_from_decl(match[1], match[3])
+if is_round_paren:
+	snip.rv = ")"
+else:
+	snip.rv = "]"
+`;
 endsnippet
 
 snippet for "std::iterator for-each loop"

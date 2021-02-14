@@ -41,19 +41,24 @@ def guess_type_from_decl(typename, varname):
     guess_type_from_decl(str, str) -> str
 
     >>> guess_type_from_decl('List<Moveable>', 'occupants')
-    'List<Moveable>'
+    ('List<Moveable>', True)
     >>> guess_type_from_decl('Moveable', 'm')
-    'Moveable'
+    ('Moveable', True)
     >>> guess_type_from_decl('List<Coroutine>', '_Anims')
-    'List<Coroutine>'
+    ('List<Coroutine>', True)
     >>> guess_type_from_decl('Dictionary<int, Coroutine>', 'm_Things')
-    'Dictionary<int, Coroutine>'
+    ('Dictionary<int, Coroutine>', True)
     >>> guess_type_from_decl('var', 'list')
-    'List<>'
+    ('List<>', True)
     >>> guess_type_from_decl('var', 'dict')
-    'Dictionary<>'
+    ('Dictionary<>', True)
     >>> guess_type_from_decl('List<const int>* const', '_Anims')
-    'List<const int>'
+    ('List<const int>', True)
+
+    >>> guess_type_from_decl('byte[]', 'data')
+    ('byte', False)
+    >>> guess_type_from_decl('byte[,]', 'data')
+    ('byte', False)
     """
     if typename == 'var':
         t = varname
@@ -69,14 +74,19 @@ def guess_type_from_decl(typename, varname):
             t = "List<>"
         elif t in dict_names:
             t = "Dictionary<>"
-        return t
+        return t, True
     else:
         # Limited C++ support.
         t = typename
         t = re.sub(r"[*].*$", '', t)
         t = re.sub(r"^const ", '', t)
         t = re.sub(r"^(public|internal|protected|private) ", '', t)
-        return t
+
+        use_square = t.endswith(']')
+        if use_square:
+            first_square = t.find('[')
+            t = t[:first_square]
+        return t, not use_square
 
 def _test():
     import doctest
