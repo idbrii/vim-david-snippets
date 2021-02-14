@@ -39,6 +39,21 @@ def guess_type_from_decl(typename, varname):
     /^\s*(\w[^=]+)(\*?) (\S+) = new/
 
     guess_type_from_decl(str, str) -> str
+
+    >>> guess_type_from_decl('List<Moveable>', 'occupants')
+    'List<Moveable>'
+    >>> guess_type_from_decl('Moveable', 'm')
+    'Moveable'
+    >>> guess_type_from_decl('List<Coroutine>', '_Anims')
+    'List<Coroutine>'
+    >>> guess_type_from_decl('Dictionary<int, Coroutine>', 'm_Things')
+    'Dictionary<int, Coroutine>'
+    >>> guess_type_from_decl('var', 'list')
+    'List<>'
+    >>> guess_type_from_decl('var', 'dict')
+    'Dictionary<>'
+    >>> guess_type_from_decl('List<const int>* const', '_Anims')
+    'List<const int>'
     """
     if typename == 'var':
         t = varname
