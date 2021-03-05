@@ -79,8 +79,8 @@ def guess_type_from_decl(typename, varname):
         # Limited C++ support.
         t = typename
         t = re.sub(r"[*].*$", '', t)
-        t = re.sub(r"^const ", '', t)
         t = re.sub(r"^(public|internal|protected|private) ", '', t)
+        t = re.sub(r"^(static |readonly |const )*", '', t)
 
         use_square = t.endswith(']')
         if use_square:
