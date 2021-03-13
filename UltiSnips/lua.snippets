@@ -166,8 +166,8 @@ endsnippet
 # But you should get above snippet instead.
 snippet /([=(),!-[\]{};:'"<>./?@#$%^&*_~]\S*\s*)fun/ "Anonymous function" r
 `!p snip.rv = match.group(1)
-`function(${2:args})
-	$0
+`function(${1:args})
+	$2
 end
 endsnippet
 
