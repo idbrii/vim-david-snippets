@@ -84,6 +84,14 @@ for ${1:i}=${3:first},${4:last}${2:,step} do
 end
 endsnippet
 
+snippet for2d "numeric iteration of 2d array - row first" b
+for ${1:y}=${2:0},${3:last}-1 do
+	for ${4:x}=${5:0},${6:last}-1 do
+		${VISUAL}$0
+	end
+end
+endsnippet
+
 snippet log "Debug print" b
 print("`!v g:snips_author`", ${1:"$2"}$3)
 endsnippet
