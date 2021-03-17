@@ -111,6 +111,17 @@ if text[-1] == '=':
 `")
 endsnippet
 
+# Capture ( to allow expansion inside printf(. I don't want inword expansion
+# because that would mean dbgfmt would also expand.
+snippet /(\()?fmt/ "String format: Format a string" r
+`!p
+if match.group(1):
+	snip.rv = match.group(1)
+else:
+	snip.rv = ""
+`("$1"):format($2)
+endsnippet
+
 #~ # TODO: Would be cleaner to just insert a list and it prepends the string part.
 #~ snippet dump "String format: dump out data" w
 #~ print(${1:${VISUAL:data}}`!p
