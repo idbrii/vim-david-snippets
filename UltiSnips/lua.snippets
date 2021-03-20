@@ -207,8 +207,8 @@ endsnippet
 
 # Quick insert pretty print for debugging, not committing.
 snippet /pr(etty)?/ "pretty print something" br
-local pretty = require "pl.pretty"
-print("`!v g:snips_author` = ", "\n", pretty.write(${1:${VISUAL}}))
+local pretty = require "inspect"
+print("`!v g:snips_author` = ", "\n", pretty(${1:${VISUAL}}, { depth = 5, }))
 endsnippet
 
 snippet inject "Inject code around an existing function" b
