@@ -206,9 +206,10 @@ return $1
 endsnippet
 
 # Quick insert pretty print for debugging, not committing.
+# Starts with what looks like assignment to make output valid lua.
 snippet /pr(etty)?/ "pretty print something" br
 local pretty = require "inspect"
-print("`!v g:snips_author` = ", "\n", pretty(${1:${VISUAL}}, { depth = 5, }))
+print("HACK =", pretty(${1:${VISUAL}}, { depth = 5, }))
 endsnippet
 
 snippet inject "Inject code around an existing function" b
