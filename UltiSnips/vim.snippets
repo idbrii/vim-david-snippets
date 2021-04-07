@@ -46,8 +46,9 @@ if !exists("${1:g}:${2:`!p snip.rv = snip.basename`}_${3:var}")
 endif${5}
 endsnippet
 
-snippet letdefault "Assign default value to a variable"
-let ${1:g:}${2:variable} = get($1, '$2', ${3:default})
+clearsnippets gvar
+snippet /letdefault|gvar/ "Assign default value to a (config) variable" br
+let ${1:g:}${2:`!p snip.rv = snip.basename + '_'`}${3:blah} = get($1, '$2$3', ${4:default})
 endsnippet
 
 snippet ifhasmapto "Define a plugin map if not already defined"
