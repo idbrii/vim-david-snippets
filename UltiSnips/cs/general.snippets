@@ -38,6 +38,64 @@ else:
 `;
 endsnippet
 
+# https://somasim.com/blog/2015/08/07/c-performance-tips-for-unity-part-2-structs-and-enums/
+snippet struct "An equatable struct" b
+struct ${1:`!p snip.rv = snip.basename`} :
+	IComparable<$1>,
+	IEquatable<$1>
+{
+	public ${3:string} ${2:_Name};
+
+	// IEquatable interface
+	public bool Equals($1 other)
+	{
+		return 0 == CompareTo(other);
+	}
+
+	// Object interface
+	public override bool Equals(object other)
+	{
+		return Equals(($1)other);
+	}
+
+	public override int GetHashCode()
+	{
+		return $2.GetHashCode();
+	}
+
+	// IComparable interface
+	public int CompareTo($1 other)
+	{
+		// TODO: Implement comparison of all of your relevant members here.
+		if ($2 != null)
+			return $2.CompareTo(other.$2);
+		if (other.$2 != null)
+			return other.$2.CompareTo($2);
+		return 0; // both null
+	}
+
+	public static bool operator > ($1 lhs, $1 rhs)
+	{
+		return lhs.CompareTo(rhs) > 0;
+	}
+
+	public static bool operator < ($1 lhs, $1 rhs)
+	{
+		return lhs.CompareTo(rhs) < 0;
+	}
+
+	public static bool operator >= ($1 lhs, $1 rhs)
+	{
+		return lhs.CompareTo(rhs) >= 0;
+	}
+
+	public static bool operator <= ($1 lhs, $1 rhs)
+	{
+		return lhs.CompareTo(rhs) <= 0;
+	}
+}
+endsnippet
+
 snippet append "Append an entry to a List" b
 ${1:${VISUAL:destination}}.Add(${2:entry});
 endsnippet
