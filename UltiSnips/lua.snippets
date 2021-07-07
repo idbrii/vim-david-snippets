@@ -93,6 +93,13 @@ for ${1:y}=${2:0},${3:last}-1 do
 end
 endsnippet
 
+snippet forargs "forloop over ... varargs" b
+for i=1,select('#', ...) do
+	local val = select(i, ...)
+	${VISUAL}$0
+end
+endsnippet
+
 snippet log "Debug print" b
 print("`!v g:snips_author`", ${1:"$2"}$3)
 endsnippet
