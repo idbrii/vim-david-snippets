@@ -75,7 +75,7 @@ get(b:, '${1:variable}', get(g:, '$1'${2:, default}))
 endsnippet
 
 snippet !fun(ction)?! "New function" br
-function! ${1:`!v expand('%:p') =~ 'autoload' ? substitute(matchstr(david#path#to_unix('%:p'),'autoload/\zs.*\ze.vim'),'[/\\]','#','g').'#' : ''`}${2:function_name}(${3})
+function! ${1:`!v expand('%:p') =~ 'autoload' ? substitute(matchstr(david#path#to_unix('%:p'),'autoload/\zs.*\ze.vim'),'[/\\]','#','g').'#' : ''`}${2:function_name}(${3}) abort
 	${4:${VISUAL}}
 endf${5}
 endsnippet
