@@ -155,15 +155,16 @@ endsnippet
 # Note: Putting two snippets next to each other (1 and 2) somehow combines them
 # when they're inserted later, so to get the base call line to work, we don't
 # allow classname customization.
-# TODO(dbriscoe): If I can't find a class definition, can I omit the classname? (How?)
 snippet /(local )?fun/ "Named function" br!
 `!p
 func = 'function '
 if match[1]:
 	func = match[1] + func
-
-klass, invoker = get_lua_classname()
-snip.rv = func + klass + invoker
+	klass = None
+else:
+	klass, invoker = get_lua_classname()
+	func = func + klass + invoker
+snip.rv = func
 `${1:new_function}(${2:args})`!p
 if not snip.c:
 	snip.shift(1 + int(vim.eval('indent(".")/&shiftwidth')))
