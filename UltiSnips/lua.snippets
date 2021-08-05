@@ -165,13 +165,24 @@ else:
 	klass, invoker = get_lua_classname()
 	func = func + klass + invoker
 snip.rv = func
-`${1:new_function}(${2:args})`!p
-if not snip.c:
-	snip.shift(1 + int(vim.eval('indent(".")/&shiftwidth')))
-	line = _fun_make_lua_parentcall(klass, t)
-	if line:
-		line = "\n" + line
-	snip.rv = line
+`${1:new_function}(${2:args})
+	${3:${VISUAL}}$4
+end
+endsnippet
+
+# Moved out of fun snippet because I rarely want this super call.
+# TODO: Would be better as a snippet that didn't create the function and just
+# looked up to find the function name and args.
+snippet super "Overridden function (calls super class)" b
+`!p
+func = 'function '
+klass, invoker = get_lua_classname()
+func = func + klass + invoker
+snip.rv = func
+`${1:new_function}(${2:args})
+	`!p
+line = _fun_make_lua_parentcall(klass, t)
+snip.rv = line
 `
 	${3:${VISUAL}}$4
 end
