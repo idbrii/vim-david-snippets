@@ -4,19 +4,19 @@ endglobal
 
 # Casts
 snippet cast "Static Cast"
-static_cast<${1}>(${2})${0}
+static_cast<${1}>(${2:${VISUAL}})${0}
 endsnippet
 
 snippet cast "Reinterpret Cast"
-reinterpret_cast<${1}>(${2})${0}
+reinterpret_cast<${1}>(${2:${VISUAL}})${0}
 endsnippet
 
 snippet cast "Dynamic Cast"
-dynamic_cast<${1}>(${2})${0}
+dynamic_cast<${1}>(${2:${VISUAL}})${0}
 endsnippet
 
 snippet cast "Const Cast"
-const_cast<${1}>(${2})${0}
+const_cast<${1}>(${2:${VISUAL}})${0}
 endsnippet
 
 snippet ifhack "Run-time debug option"
