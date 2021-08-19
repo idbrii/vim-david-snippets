@@ -1,25 +1,5 @@
 global !p
-def _search_and_return_first_group_from_regex(regex):
-	for line in snip.buffer:
-		match = regex.match(line)
-		if match:
-			return match.group(1)
-	return None
-
-
-def get_lua_classname():
-	# class.lua
-	tablename = _search_and_return_first_group_from_regex(re.compile("local (\w*) = [cC]lass"))
-	invoker = ':'
-	if not tablename:
-		# Table-scoped functions.
-		tablename = _search_and_return_first_group_from_regex(re.compile("local ("+ snip.basename +") = ", re.IGNORECASE))
-		invoker = '.'
-	if not tablename:
-		# No scope for functions -- dump in global namespace.
-		tablename = ''
-		invoker = ''
-	return tablename, invoker
+import snip_lua
 
 # Not shareable. Only exists to extract parsing from snippet.
 def _fun_make_lua_parentcall(klass, t):
@@ -162,7 +142,7 @@ if match[1]:
 	func = match[1] + func
 	klass = None
 else:
-	klass, invoker = get_lua_classname()
+	klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer)
 	func = func + klass + invoker
 snip.rv = func
 `${1:new_function}(${2:args})
@@ -176,7 +156,7 @@ endsnippet
 snippet super "Overridden function (calls super class)" b
 `!p
 func = 'function '
-klass, invoker = get_lua_classname()
+klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer)
 func = func + klass + invoker
 snip.rv = func
 `${1:new_function}(${2:args})
@@ -258,7 +238,7 @@ endsnippet
 
 snippet debugdraw "Add a child's imgui draw section" b
 function ${1:`!p
-klass, invoker = get_lua_classname()
+klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer)
 snip.rv = klass
 `}:DebugDraw_AddSection(dbui, panel)
 	$1._base.DebugDraw_AddSection(self, dbui, panel)
@@ -284,7 +264,7 @@ local panel = DebugPanel()
 panel:StartFrame()
 local dbui = require("dbui/imgui")
 dbui.Begin("${1:`!p
-klass, invoker = get_lua_classname()
+klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer)
 snip.rv = klass
 `}") do
 	self.${2:widget}:DebugDraw_AddSection(dbui, panel)
