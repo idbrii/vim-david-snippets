@@ -142,7 +142,7 @@ if match[1]:
 	func = match[1] + func
 	klass = None
 else:
-	klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer)
+	klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer, vim.current.window.cursor)
 	func = func + klass + invoker
 snip.rv = func
 `${1:new_function}(${2:args})
@@ -156,7 +156,7 @@ endsnippet
 snippet super "Overridden function (calls super class)" b
 `!p
 func = 'function '
-klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer)
+klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer, vim.current.window.cursor)
 func = func + klass + invoker
 snip.rv = func
 `${1:new_function}(${2:args})
@@ -238,7 +238,7 @@ endsnippet
 
 snippet debugdraw "Add a child's imgui draw section" b
 function ${1:`!p
-klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer)
+klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer, vim.current.window.cursor)
 snip.rv = klass
 `}:DebugDraw_AddSection(ui, panel)
 	$1._base.DebugDraw_AddSection(self, ui, panel)
@@ -264,7 +264,7 @@ local panel = DebugPanel()
 panel:StartFrame()
 local ui = require("dbui_no_package/imgui")
 ui:Begin("${1:`!p
-klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer)
+klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer, vim.current.window.cursor)
 snip.rv = klass
 `}") do
 	self.${2:widget}:DebugDraw_AddSection(ui, panel)
