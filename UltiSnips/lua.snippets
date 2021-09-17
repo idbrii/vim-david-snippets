@@ -223,55 +223,8 @@ snippet append "Append an entry to the table's array"
 table.insert(${1:${VISUAL:table}}, ${2:entry})
 endsnippet
 
-snippet imgui "Start an imgui window" b
-local ui = require("dbui_no_package/imgui")
-ui:Begin("${1:window name}") do
-	$2
-end
-ui:End()
-endsnippet
-
 # Standard lua stack trace
 snippet trace "Insert stack trace" b
 print("`!v g:snips_author`", debug.traceback("breakpoint: ${1:msg}"))
 endsnippet
 
-snippet debugdraw "Add a child's imgui draw section" b
-function ${1:`!p
-klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer, vim.current.window.cursor)
-snip.rv = klass
-`}:DebugDraw_AddSection(ui, panel)
-	$1._base.DebugDraw_AddSection(self, ui, panel)
-
-local TheUI = nil -- Use this global for local hacks to avoid changing function signatures.
-	TheUI = ui
-
-	ui:Spacing()
-	ui:Text("$1")
-	ui:Indent() do
-		$0
-	end
-	ui:Unindent()
-end
-endsnippet
-
-snippet debugdraw "Add the parent's setup and call from onupdate" b
--- global scope
-local DebugPanel = require("dbui_no_package/debug_panel")
-local panel = DebugPanel()
-
--- function scope
-panel:StartFrame()
-local ui = require("dbui_no_package/imgui")
-ui:Begin("${1:`!p
-klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer, vim.current.window.cursor)
-snip.rv = klass
-`}") do
-	self.${2:widget}:DebugDraw_AddSection(ui, panel)
-end
-ui:End()
-endsnippet
-
-snippet uitext "Create a text widget" b
-${1:local name} = ${2:${VISUAL:root}}:AddChild(Text(CHATFONT, 28, "${3:text}"))
-endsnippet
