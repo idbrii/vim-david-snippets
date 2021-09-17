@@ -224,11 +224,11 @@ table.insert(${1:${VISUAL:table}}, ${2:entry})
 endsnippet
 
 snippet imgui "Start an imgui window" b
-local dbui = require("dbui/imgui")
-dbui.Begin("${1:window name}") do
+local ui = require("dbui_no_package/imgui")
+ui:Begin("${1:window name}") do
 	$2
 end
-dbui.End()
+ui:End()
 endsnippet
 
 # Standard lua stack trace
@@ -240,36 +240,36 @@ snippet debugdraw "Add a child's imgui draw section" b
 function ${1:`!p
 klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer)
 snip.rv = klass
-`}:DebugDraw_AddSection(dbui, panel)
-	$1._base.DebugDraw_AddSection(self, dbui, panel)
+`}:DebugDraw_AddSection(ui, panel)
+	$1._base.DebugDraw_AddSection(self, ui, panel)
 
 local TheUI = nil -- Use this global for local hacks to avoid changing function signatures.
-	TheUI = dbui
+	TheUI = ui
 
-	dbui.Spacing()
-	dbui.Text("$1")
-	dbui.Indent() do
+	ui:Spacing()
+	ui:Text("$1")
+	ui:Indent() do
 		$0
 	end
-	dbui.Unindent()
+	ui:Unindent()
 end
 endsnippet
 
 snippet debugdraw "Add the parent's setup and call from onupdate" b
 -- global scope
-local DebugPanel = require("dbui/debug_panel")
+local DebugPanel = require("dbui_no_package/debug_panel")
 local panel = DebugPanel()
 
 -- function scope
 panel:StartFrame()
-local dbui = require("dbui/imgui")
-dbui.Begin("${1:`!p
+local ui = require("dbui_no_package/imgui")
+ui:Begin("${1:`!p
 klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer)
 snip.rv = klass
 `}") do
-	self.${2:widget}:DebugDraw_AddSection(dbui, panel)
+	self.${2:widget}:DebugDraw_AddSection(ui, panel)
 end
-dbui.End()
+ui:End()
 endsnippet
 
 snippet uitext "Create a text widget" b
