@@ -1,5 +1,9 @@
 global !p
 import snip_lua
+import snip_common as common
+
+def comma(after_comma):
+	snip.rv = common.comma(after_comma)
 
 # Not shareable. Only exists to extract parsing from snippet.
 def _fun_make_lua_parentcall(klass, t):
@@ -81,7 +85,7 @@ end
 endsnippet
 
 snippet log "Debug print" b
-print("`!v g:snips_author`", ${1:"$2"}$3)
+print("`!v g:snips_author`"`!p comma(t[1])`${1:"$2"}$3)
 endsnippet
 
 snippet dump "String format: dump out data" w

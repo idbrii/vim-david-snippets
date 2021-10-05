@@ -88,6 +88,18 @@ def guess_type_from_decl(typename, varname):
             t = t[:first_square]
         return t, not use_square
 
+
+def comma(after_comma):
+    """
+    Only insert a comma if the input after_comma is non empty.
+    Usage: func("${1:event}"`!p snip.rv = comma(t[2])`${2:data})
+    """
+    if after_comma:
+        return ", "
+    else:
+        return ""
+
+
 def _test():
     import doctest
     doctest.testmod()
