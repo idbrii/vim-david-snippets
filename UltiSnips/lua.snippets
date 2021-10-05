@@ -44,6 +44,10 @@ snip.rv = snip.context.strip()`} then
 ${3:end}$0
 endsnippet
 
+snippet skip "Early return: Skip following code in a function" b
+if true then return end
+endsnippet
+
 # I don't like the vim-snippets version of for because I want some consistency
 # between languages. fori is for integer index loops. Define my own and they
 # seem to clobber the vim-snippets ones.
