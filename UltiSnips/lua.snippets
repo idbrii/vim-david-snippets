@@ -93,17 +93,10 @@ print("`!v g:snips_author`"`!p comma(t[1])`${1:"$2"}$3)
 endsnippet
 
 snippet dump "String format: dump out data" w
-print("${1:${VISUAL:data}}`!p
-text = t[1]
-if text[-1] == '=':
-	prev = text.rfind('"')
-	if prev == -1:
-		prev = 0
-	else:
-		prev += 1
-	text += ' ", '+ text[prev:-1] +', "'
-	t[1] = text
-`")
+local pretty = require "inspect"
+print("${1:${VISUAL:data}}", pretty({ `!p
+snip.rv = re.sub("(\S+)(,|$)", r"['\1'] = \1,", t[1])
+` }, { depth = 5, }))
 endsnippet
 
 # Capture ( to allow expansion inside printf(. I don't want inword expansion
