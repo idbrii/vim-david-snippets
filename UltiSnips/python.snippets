@@ -50,10 +50,10 @@ endsnippet
 
 snippet walk "A directory walk"
 for dirpath,dirs,files in os.walk(${1:root}`!p comma(t[2])`${2:topdown=True}`!p comma(t[3])`${3:onerror=${4:fn(OSError)}}):
-	for ${5:directory} in $5s:
-		path = os.path.join(dirpath, $5)${7:`!p
+	for ${10:`!p snip.rv = t[5][0]`} in ${5:dirs}:
+		path = os.path.join(dirpath, $10)${11:`!p
 if len(t[2]) > 0:
-	# Show that you can edit 'dirs'
+	# Show that you can edit 'dirs' when topdown.
 	snip.shift(3)
 	snip.rv  = '\n' + snip.mkline('if True:')
 	snip.rv += '\n' + snip.mkline('dirs[:] = dirs[0:5]')
