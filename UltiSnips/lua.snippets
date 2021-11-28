@@ -146,7 +146,7 @@ else:
 	klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer, vim.current.window.cursor)
 	func = func + klass + invoker
 snip.rv = func
-`${1:new_function}(${2:args})
+`${1:new_function}($2)
 	${3:${VISUAL}}$4
 end
 endsnippet
@@ -160,7 +160,7 @@ func = 'function '
 klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer, vim.current.window.cursor)
 func = func + klass + invoker
 snip.rv = func
-`${1:new_function}(${2:args})
+`${1:new_function}($2)
 	`!p
 line = _fun_make_lua_parentcall(klass, t)
 snip.rv = line
@@ -177,7 +177,7 @@ endsnippet
 # But you should get above snippet instead.
 snippet /([=(),!-[\]{};:'"<>./?@#$%^&*_~]\S*\s*)fun/ "Anonymous function" r
 `!p snip.rv = match.group(1)
-`function(${1:args})
+`function($1)
 	$2
 end
 endsnippet
