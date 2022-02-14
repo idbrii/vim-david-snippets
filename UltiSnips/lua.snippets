@@ -96,7 +96,7 @@ snippet dump "String format: dump out data" w
 local pretty = require "inspect"
 print("${1:${VISUAL:data}}", pretty({ `!p
 snip.rv = re.sub("(\S+)(,|$)", r"['\1'] = \1,", t[1])
-` }, { depth = 5, }))
+` }, { depth = 5, process = pretty.processes and pretty.processes.skip_mt, }))
 endsnippet
 
 # Capture ( to allow expansion inside printf(. I don't want inword expansion
@@ -207,9 +207,10 @@ endsnippet
 
 # Quick insert pretty print for debugging, not committing.
 # Starts with what looks like assignment to make output valid lua.
+# I don't always have pretty.processes setup, so make it optional (if ugly).
 snippet /pr(etty)?/ "pretty print something" br
 local pretty = require "inspect"
-print("HACK =", pretty(${1:${VISUAL}}, { depth = 5, }))
+print("HACK =", pretty(${1:${VISUAL}}, { depth = 5, process = pretty.processes and pretty.processes.skip_mt, }))
 endsnippet
 
 snippet inject "Inject code around an existing function" b
