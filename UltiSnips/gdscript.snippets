@@ -1,5 +1,50 @@
 priority -50
 
+global !p
+def csv_to_dict(text):
+	return ',\n'.join(['"{key}": {key}'.format(key = k.strip()) for i,k in enumerate(text.split(','))])
+endglobal
+
+# My stuff {{{1
+
+snippet log "Log a message" w
+print($1)
+endsnippet
+
+# As you type comma-separated parameters on the right, {n} values appear in the
+# format string.
+# TODO: Add support for {key} and key=value.
+snippet fmt "String format" w
+print(`!p
+text = ' '.join([('{k%s}' % i) for i,k in enumerate(t[1].split(','))])
+dict_text = csv_to_dict(t[1])
+snip.rv = '"{}".format({{\n{}\n}})'.format(text, dict_text)
+`) # ${1:${VISUAL:data}}
+endsnippet
+
+# As you type comma-separated parameters on the right, val={n} values appear in
+# the format string.
+snippet dump "String format: dump out data" w
+print(`!p
+dict_text = csv_to_dict(t[1])
+snip.rv = '{{\n{}\n}}'.format(dict_text)
+`) # ${1:${VISUAL:data}}
+endsnippet
+
+snippet trace "Print a stack trace" b
+print_stack()
+endsnippet
+
+snippet append "Add to end of array" b
+${1:${VISUAL:array}}.append(${2:entry})
+endsnippet
+
+# Standard stuff {{{1
+
+snippet var "Declare variable with type inference" b
+var $1 := $2
+endsnippet
+
 snippet with "with" b
 with ${1:expr}`!p snip.rv = " as " if t[2] else ""`${2:var}:
 	${3:${VISUAL:pass}}
