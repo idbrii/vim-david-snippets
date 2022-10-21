@@ -132,6 +132,9 @@ snippet = "Assignment / increment / decrement" b
 ${1:${VISUAL:variable}} = $1 ${2:+} ${3:1}
 endsnippet
 
+# My function snippet is better and can jump to next tabstop.
+clearsnippets !fun(ction)?!
+
 # Based on vim-snippets fun but adds classname.
 # Note: Putting two snippets next to each other (1 and 2) somehow combines them
 # when they're inserted later, so to get the base call line to work, we don't
