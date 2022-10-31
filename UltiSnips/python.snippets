@@ -154,6 +154,12 @@ self._$1 = ${1:var}
 endsnippet
 
 # unit tests
+snippet test "Pytest test"
+def test_${2: }$1():
+	assert($3)
+	$4
+endsnippet
+
 snippet unittest "Define unittests when executing module"
 if __name__ == '__main__':
 	import unittest
