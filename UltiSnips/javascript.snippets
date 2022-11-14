@@ -16,10 +16,17 @@ for (let ${2:i} = ${1:Things.length} - 1; $2 >= 0; $2--)
 }
 endsnippet
 
-snippet fore "for loop over collection" b
+snippet fore "for loop over object (map)" b
 for (let ${2:key} in ${1:items})
 {
 	const val = $1[$2];
+	${VISUAL}$0
+}
+endsnippet
+
+snippet fore "for loop over array" b
+for (let ${2:val} of ${1:items})
+{
 	${VISUAL}$0
 }
 endsnippet
