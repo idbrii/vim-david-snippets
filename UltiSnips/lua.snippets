@@ -185,6 +185,13 @@ snippet /([=(),!-[\]{};:'"<>./?@#$%^&*_~]\S*\s*)fun/ "Anonymous function" r
 end
 endsnippet
 
+snippet test "testy.lua test"
+local function test_${2: }$1()
+	assert($3)
+	$4
+end
+endsnippet
+
 # Using double quotes here because inclement uses double quotes.
 snippet cl "Gabe class"
 local class = require "gabe.class"
