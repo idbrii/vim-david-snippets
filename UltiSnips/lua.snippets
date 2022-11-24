@@ -215,6 +215,15 @@ end
 return $1
 endsnippet
 
+snippet mod "Lua Module" b
+local ${9:`!p snip.rv = snip.basename `} = {}
+
+function $9.$2($3)
+end
+
+return $9
+endsnippet
+
 # Quick insert pretty print for debugging, not committing.
 # Starts with what looks like assignment to make output valid lua.
 # I don't always have pretty.processes setup, so make it optional (if ugly).
