@@ -45,6 +45,10 @@ snippet var "Declare variable with type inference" b
 var $1 := $2
 endsnippet
 
+snippet pub "Public (tunable) variable" b
+export(${3:float}, ${4:min}, ${5:max}, ${6:step}) var $1 := $2
+endsnippet
+
 snippet with "with" b
 with ${1:expr}`!p snip.rv = " as " if t[2] else ""`${2:var}:
 	${3:${VISUAL:pass}}
@@ -77,6 +81,9 @@ func ${1:function}(${2:args}):
 	${3:${VISUAL:pass}}
 endsnippet
 
+snippet im "Import a type" b
+const $1 = preload("res://$2.gd")
+endsnippet
 
 # If / Else / Elif {{{1
 
