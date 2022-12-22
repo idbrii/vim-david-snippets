@@ -8,7 +8,7 @@ endglobal
 # My stuff {{{1
 
 snippet log "Log a message" w
-print($1)
+printt($1)
 endsnippet
 
 # As you type comma-separated parameters on the right, {n} values appear in the
@@ -41,7 +41,7 @@ endsnippet
 
 # Standard stuff {{{1
 
-snippet var "Declare variable with type inference" b
+snippet var "Declare variable with type inference"
 var $1 := $2
 endsnippet
 
@@ -53,6 +53,10 @@ snippet with "with" b
 with ${1:expr}`!p snip.rv = " as " if t[2] else ""`${2:var}:
 	${3:${VISUAL:pass}}
 $0
+endsnippet
+
+snippet assert "Assertion" b
+assert(${1:cond}, ${2:optional message})
 endsnippet
 
 # Loops {{{1
@@ -76,8 +80,8 @@ class ${1:Name}:
 	$0
 endsnippet
 
-snippet !fun|def! "function with docstrings" br
-func ${1:function}(${2:args}):
+snippet !(static )?fun|def! "function with docstrings" br
+`!p snip.rv = match.group(1) or ""`func ${1:function}(${2:args}):
 	${3:${VISUAL:pass}}
 endsnippet
 
