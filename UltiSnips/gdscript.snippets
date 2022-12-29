@@ -72,6 +72,19 @@ for ${1:item} in ${2:iterable}:
 	${3:${VISUAL:pass}}
 endsnippet
 
+snippet forchild "foreach over child nodes" b
+for ${1:item} in ${2:x.}get_children():
+	${3:${VISUAL:pass}}
+endsnippet
+
+snippet fordesc "foreach over all descendant nodes" b
+var waiting := get_children()
+while not waiting.empty():
+	var node := waiting.pop_back() as Node
+	waiting.append_array(node.get_children())
+	${3:${VISUAL:pass}}
+endsnippet
+
 
 # Class and Method {{{1
 
