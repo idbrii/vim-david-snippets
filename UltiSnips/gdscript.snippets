@@ -49,6 +49,11 @@ snippet pub "Public (tunable) variable" b
 export(${3:float}, ${4:min}, ${5:max}, ${6:step}) var $1 := $2
 endsnippet
 
+snippet pubnode "Inspector-set node path" b
+export(NodePath) var $1_path = null
+onready var ${1:node} := get_node($1_path)
+endsnippet
+
 snippet with "with" b
 with ${1:expr}`!p snip.rv = " as " if t[2] else ""`${2:var}:
 	${3:${VISUAL:pass}}
@@ -124,6 +129,26 @@ elif ${3:condition}:
 else:
 	${5:pass}
 endsnippet
+
+snippet /ma(tch)?/ "match statement" brm
+match ${1:pivot}:`!p
+if snip.v.text:
+	lines = snip.v.text.splitlines()
+	enum_name = re.sub(r"\s*enum \s*(\b\w+\b).*", r"\1", lines[0])
+	lines = [re.sub(r"\s+(\w+),?.*", r"\1:", line) for line in lines if "}" not in line]
+	snip >> 1
+	for pair in lines[1:]:
+		snip += f"{enum_name}.{pair}"
+		snip >> 1
+		snip += "pass"
+		snip << 1
+	snip << 1
+else:
+	snip >> 1
+	snip += ""
+`$0
+endsnippet
+
 
 
 # Exceptions {{{1
