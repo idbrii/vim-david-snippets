@@ -3,7 +3,7 @@
 import re
 
 def __convert_enum_to_case(enum_type, enum_value_text):
-    enum_value_text = re.sub('(\s*=[^,]*)?(,.*)?\s*$', ':', enum_value_text, count=1)
+    enum_value_text = re.sub(r'(\s*=[^,]*)?(,.*)?\s*$', ':', enum_value_text, count=1)
     case = []
     case.append((1, "case {t}.{v}".format(t=enum_type, v=enum_value_text)))
     case.append((2, "break;"))
@@ -106,7 +106,7 @@ def convert_enum_to_switch(enum_value_textblock):
     >>> test(enum_text_cpp)
 
     """
-    paren_line_re = re.compile("^\s*[{}]\s*$")
+    paren_line_re = re.compile(r"^\s*[{}]\s*$")
     enum_value_lines = enum_value_textblock.split('\n')
     enum_value_lines = [line.strip() for line in enum_value_lines if paren_line_re.search(line) is None]
     enum_value_lines = [line for line in enum_value_lines if len(line) > 0]
