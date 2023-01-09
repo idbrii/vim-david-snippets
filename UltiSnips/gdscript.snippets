@@ -190,5 +190,16 @@ finally:
 endsnippet
 
 
+# plugin: debug_draw_3d {{{1
+# https://github.com/DmitriySalnikov/godot_debug_draw_3d
+
+snippet dshape "Add debug_draw_3d shape" b
+DebugDraw.draw_${1:sphere,cylinder,box,aabb,line,ray,arrow,square,position}(${2:pos}, Vector3(1, 2, 1), ${4:Color.${3:green}})
+endsnippet
+
+snippet dtext "Add debug_draw_3d text" b
+DebugDraw.set_text("${1:key}", "${2:text}")
+endsnippet
+
 
 # vim:ft=snippets:
