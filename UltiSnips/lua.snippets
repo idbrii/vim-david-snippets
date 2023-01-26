@@ -252,3 +252,27 @@ snippet trace "Insert stack trace" b
 print("`!v g:snips_author`", debug.traceback("breakpoint: ${1:msg}"))
 endsnippet
 
+
+# File IO {{{
+
+snippet write "Write to a file" b
+local file = io.open("$1", "w")
+-- Doesn't add any newlines
+file:write(${2:text})
+file:close()
+endsnippet
+
+snippet read "Read from a file" b
+local file = io.open("$1", "r")
+-- See lrv-file:read for *n, *l, *L
+local text = file:read(${2:*all})
+file:close()
+endsnippet
+
+snippet forfile "file line iteration loop" b
+for line in io.lines(${3:fname}) do
+	-- line excludes newlines
+	${VISUAL}$0
+end
+endsnippet
+
