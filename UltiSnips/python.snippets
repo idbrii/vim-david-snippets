@@ -31,21 +31,21 @@ snippet append "Merge array to array" b
 ${1:${VISUAL:list}}.extend(${2:list})
 endsnippet
 
-snippet wh "while"
+snippet wh "while loop"
 while ${1:condition}:
-	${2:${VISUAL:${VISUAL}}}
+	${2:${VISUAL:pass}}
 endsnippet
 
-snippet dowh "do..while equivalent"
+snippet dowh "do..while loop equivalent"
 while True:
-	${1:${VISUAL:${VISUAL}}}
+	${1:${VISUAL}}
 	if ${2:condition}:
 		break
 endsnippet
 
 snippet with "with block"
 with ${1:expr} as ${2:var}:
-	${3:${VISUAL:${VISUAL}}}
+	${3:${VISUAL:pass}}
 endsnippet
 
 snippet walk "A directory walk"
