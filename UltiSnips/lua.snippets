@@ -88,6 +88,18 @@ for i=1,select('#', ...) do
 end
 endsnippet
 
+snippet wh "while loop"
+while ${1:condition} do
+	${2:${VISUAL}}$3
+end
+endsnippet
+
+snippet dowh "do..while loop equivalent (repeat)"
+repeat
+	${1:${VISUAL}}$3
+until ${2:condition}
+endsnippet
+
 # Optimized for printing name and variable:
 #	print("me", "smurf", obj)
 # Skip over quotes to make it easy to delete.
