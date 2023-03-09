@@ -39,7 +39,11 @@ endsnippet
 snippet /(else)?if/ "if statement" "vim.eval('@0')" bre
 `!p snip.rv = match.group(0)` ${1:`!p
 # use context to capture initial register value
-snip.rv = snip.context.strip()`} then
+txt = snip.context.strip()
+if "\n" in txt:
+	txt = ""
+snip.rv = txt
+`} then
 	${VISUAL}$2
 ${3:end}$0
 endsnippet
