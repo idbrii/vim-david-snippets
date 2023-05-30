@@ -105,10 +105,10 @@ until ${2:condition}
 endsnippet
 
 # Optimized for printing name and variable:
-#	print("me", "smurf", obj)
+#	print("me", "smurf", nil)
 # Skip over quotes to make it easy to delete.
 snippet log "Debug print" b
-print("`!v g:snips_author`"`!p comma(t[10])`${10:"$1"}`!p comma(t[2])`${2:obj})
+print("`!v g:snips_author`"`!p comma(t[10])`${10:"$1"}`!p comma(t[2])`${2:nil})
 endsnippet
 
 snippet dump "String format: dump out data" w
