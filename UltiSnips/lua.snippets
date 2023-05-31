@@ -115,7 +115,7 @@ snippet dump "String format: dump out data" w
 local pretty = require "inspect"
 print("${1:${VISUAL:data}}", pretty({ `!p
 snip.rv = re.sub("(\S+)(,|$)", r"['\1'] = \1,", t[1])
-` }, { depth = 5, process = pretty.processes and pretty.processes.skip_mt, }))
+` }, { depth = 5, process = pretty.processes and pretty.processes.slim, }))
 endsnippet
 
 # Capture ( to allow expansion inside printf(. I don't want inword expansion
