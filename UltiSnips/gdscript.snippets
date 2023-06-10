@@ -190,6 +190,21 @@ finally:
 endsnippet
 
 
+snippet event "Emit a signal (Push an event)" b
+${1:signal}.emit(${2:args})
+endsnippet
+
+snippet event "Declare a signal (Define an event)" b
+signal ${1:name}(${2:args})
+endsnippet
+
+snippet event "Connect to signal (Listen for event)" b
+self.${1:signal name}.connect(_on_$1)
+func _on_$1():
+	pass
+endsnippet
+
+
 # plugin: debug_draw_3d {{{1
 # https://github.com/DmitriySalnikov/godot_debug_draw_3d
 
