@@ -45,12 +45,13 @@ snippet var "Declare variable with type inference"
 var $1 := $2
 endsnippet
 
-snippet pub "Public (tunable) variable" b
-export(${3:float}, ${4:min}, ${5:max}, ${6:step}) var $1 := $2
+# There are now a bunch of different ones of these, but this is the most comon.
+snippet pub "Public (tunable) variable with range" b
+@export_range(${4:min}, ${5:max}, ${6:step}) var $1 := $2
 endsnippet
 
 snippet pubnode "Inspector-set node path" b
-export(NodePath) var $1_path = null
+@export(NodePath) var $1_path = null
 onready var ${1:node} := get_node($1_path)
 endsnippet
 
