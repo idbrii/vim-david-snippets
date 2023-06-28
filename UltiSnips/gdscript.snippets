@@ -39,6 +39,42 @@ snippet append "Add to end of array" b
 ${1:${VISUAL:array}}.append(${2:entry})
 endsnippet
 
+# Not sure how bad for perf creating all these timers is, but it's easy for prototyping.
+snippet delay "Add a coroutine delay" b
+await get_tree().create_timer(${1:duration}).timeout
+endsnippet
+
+# Pretty simple, so primarily use this method.
+snippet repeat "Do something on a delayed loop" b
+while ${3:true}:
+	await get_tree().create_timer(${1:duration}).timeout
+	$2
+endsnippet
+
+# Re-use a Timer node. Seems worse than repeat since it's so much code. The
+# timer restarts immediately so later delays would not postpone it. But it
+# doesn't keep generating SceneTreeTimer References.
+snippet repeatnode "Do something on a delayed loop with a Timer node" b
+var timer := Timer.new()
+add_child(timer)
+timer.start(${1:duration})
+while ${3:true}:
+	await timer.timeout
+	$2
+timer.queue_free()
+endsnippet
+
+snippet duration "Do something repeatedly for a duration" b
+var timer := get_tree().create_timer(${1:duration})
+while not timer.is_stopped():
+	await get_tree().process_frame
+	$2
+endsnippet
+
+snippet animover "Coroutine wait for anim complete" b
+await ${1:visual}.animation_finished
+endsnippet
+
 # Standard stuff {{{1
 
 snippet var "Declare variable with type inference"
