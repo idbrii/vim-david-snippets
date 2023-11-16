@@ -259,6 +259,22 @@ $2.$1 = function(${3:self}$4)
 end
 endsnippet
 
+snippet instrument "Wrap list of class functions with logging" b
+local targets = {
+	"${1:OnLoad}",
+}
+for i,fn in ipairs(targets) do
+	local old_fn = ${9:`!p
+klass, invoker = snip_lua.get_lua_classname(snip.basename, snip.buffer, vim.current.window.cursor)
+snip.rv = klass
+`}[fn]
+	$9[fn] = function(...)
+		print("`!v g:snips_author`", "$9", fn)
+		return old_fn and old_fn(...) or nil
+	end
+end
+endsnippet
+
 snippet append "Append an entry to the table's array"
 table.insert(${1:${VISUAL:table}}, ${2:entry})
 endsnippet
