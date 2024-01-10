@@ -55,6 +55,14 @@ with ${1:expr} as ${2:var}:
 	${3:${VISUAL:pass}}
 endsnippet
 
+snippet curfile "Get the path to the script file." b
+script_path = Path(__file__)
+endsnippet
+
+snippet curdir "Get the path to the directory containing the script file." b
+script_path = Path(__file__).parent
+endsnippet
+
 snippet walk "A directory walk"
 for dirpath,dirs,files in os.walk(${1:root}`!p comma(t[2])`${2:topdown=True}`!p comma(t[3])`${3:onerror=${4:fn(OSError)}}):
 	for ${10:`!p snip.rv = t[5][0]`} in ${5:dirs}:
