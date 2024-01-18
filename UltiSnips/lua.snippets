@@ -36,7 +36,7 @@ snippet '=\s*\"' "multi-line string" r
 ]]
 endsnippet
 
-snippet /(else)?if/ "if statement" "vim.eval('@0')" bre
+snippet /(el)?if/ "if statement" "vim.eval('@0')" bre
 `!p snip.rv = match.group(0)` ${1:`!p
 # use context to capture initial register value
 txt = snip.context.strip()
