@@ -245,6 +245,15 @@ func _on_$1():
 endsnippet
 
 
+snippet yield "Wait for a signal to fire" b
+await ${2:get_tree().}${1:process_frame}
+endsnippet
+
+snippet yield "gd3: Wait for a signal to fire" b
+yield(${2:get_tree()}, "${1:idle_frame}")
+endsnippet
+
+
 # plugin: debug_draw_3d {{{1
 # https://github.com/DmitriySalnikov/godot_debug_draw_3d
 
