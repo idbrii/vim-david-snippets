@@ -297,7 +297,7 @@ endsnippet
 snippet read "Read a whole file" b
 local file = io.open("$1", "r")
 -- See lrv-file:read for *n, *l, *L
-local text = file:read(${2:*all})
+local text = file:read("${2:*all}")
 file:close()
 endsnippet
 
