@@ -138,6 +138,13 @@ while not waiting.empty():
 	${3:${VISUAL:pass}}
 endsnippet
 
+# The named type created by enum is just a dictionary, so both work where.
+snippet fordict "foreach over dict/enum values" b
+for ${5:k} in ${2:container}.keys():
+	var ${4:item} = $2[$5]
+	${3:${VISUAL}}
+endsnippet
+
 
 # Class and Method {{{1
 
@@ -153,6 +160,12 @@ endsnippet
 
 snippet im "Import a type" b
 const $1 = preload("res://$2.gd")
+endsnippet
+
+snippet enum "enumeration" b
+enum ${1:Name} {
+${2:ITEM}
+}
 endsnippet
 
 
