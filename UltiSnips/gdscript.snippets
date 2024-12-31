@@ -3,6 +3,12 @@ priority -50
 global !p
 def csv_to_dict(text):
 	return ',\n'.join(['"{key}": {key}'.format(key = k.strip()) for i,k in enumerate(text.split(','))])
+def csv_to_ctor(text):
+	values = text.split(',')
+	r = "func _init("
+	r += ", ".join(["p_{key} = null".format(key = k.strip()) for i,k in enumerate(values)])
+	r += "):\n    " + "\n    ".join(['{key} = p_{key}'.format(key = k.strip()) for i,k in enumerate(values)])
+	return r
 endglobal
 
 # My stuff {{{1
@@ -29,6 +35,16 @@ print(`!p
 dict_text = csv_to_dict(t[1])
 snip.rv = '{{\n{}\n}}'.format(dict_text)
 `) # ${1:${VISUAL:data}}
+endsnippet
+
+# Fill in the comma-separated parameters and it generates the _init() for
+# Resources. If you define _init, you need to pass all the exported values or
+# they won't serialize correctly. (But avoid defining it if possible!)
+snippet resource "Create a Resource _init ctor" w
+`!p
+snip.rv = csv_to_ctor(t[1])
+`
+	# ${1:${VISUAL:data}}
 endsnippet
 
 snippet trace "Print a stack trace" b
