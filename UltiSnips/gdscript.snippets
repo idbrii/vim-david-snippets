@@ -262,6 +262,45 @@ snippet yield "Wait for a signal to fire" b
 await ${2:get_tree().}${1:process_frame}
 endsnippet
 
+# Common Signals {{{1
+snippet visible "Notify when become visible" b
+func _ready():
+	${1:self}.visibility_changed.connect(_on_visibility_changed)
+
+
+func _on_visibility_changed():
+	if $1.visible:
+		${2:VISUAL}
+endsnippet
+
+snippet press "Notify when button pressed" b
+func _ready():
+	${1:button}.pressed.connect(_on_pressed_${2:$1})
+
+
+func _on_pressed_$2():
+	${0:VISUAL}
+endsnippet
+
+snippet area "Notify body when Entering/Exiting an Area" b
+func _ready():
+	self.body_entered.connect(_on_body_entered)
+	self.body_exited.connect(_on_body_exited)
+
+
+func _on_body_entered(body: Node2D):
+	if not body.is_in_group(Groups.PLAYER):
+		return
+	body.enter_${1:area}(self)
+
+
+func _on_body_exited(body: Node2D):
+	if not body.is_in_group(Groups.PLAYER):
+		return
+	body.exit_$1(self)
+endsnippet
+
+
 # plugin: debug_draw_3d {{{1
 # https://github.com/DmitriySalnikov/godot_debug_draw_3d
 
