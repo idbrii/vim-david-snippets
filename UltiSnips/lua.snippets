@@ -301,13 +301,7 @@ local text = file:read("${2:*all}")
 file:close()
 endsnippet
 
-snippet read "Read lines from a file" b
-for line in io.lines("${1:filename}") do 
-	$2
-end
-endsnippet
-
-snippet forfile "file line iteration loop" b
+snippet /read|forfile/ "Read lines from a file" br
 for line in io.lines(${3:fname}) do
 	-- line excludes newlines
 	${VISUAL}$0
