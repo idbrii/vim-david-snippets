@@ -63,6 +63,22 @@ snippet curdir "Get the path to the directory containing the script file." b
 script_path = Path(__file__).parent
 endsnippet
 
+snippet write "Write to a file" b
+with Path("${1:path/to/file}").open("w") as f:
+	${3:f.write($2)}
+endsnippet
+
+snippet read "Read a whole file" b
+${2:f} = Path("${1:path/to/file}").read_text()
+endsnippet
+
+snippet /read|forfile/ "Read lines from a file" br
+with Path("${1:path/to/file}").open("r") as f:
+	for line in f:
+		${2:line = line.rstrip()  # Remove newlines}
+		$0
+endsnippet
+
 snippet walk "A directory walk"
 for dirpath,dirs,files in os.walk(${1:root}`!p comma(t[2])`${2:topdown=True}`!p comma(t[3])`${3:onerror=${4:fn(OSError)}}):
 	for ${10:`!p snip.rv = t[5][0]`} in ${5:dirs}:
