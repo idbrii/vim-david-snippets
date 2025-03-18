@@ -204,6 +204,14 @@ snippet /([=(),!-[\]{};:'"<>./?@#$%^&*_~]\S*\s*)fun/ "Anonymous function" r
 end
 endsnippet
 
+# Special case for returning a function since it's not covered by other fun
+# snippets.
+snippet /return fun/ "Anonymous function" br
+return function($1)
+	$2
+end
+endsnippet
+
 snippet test "testy.lua test"
 local function test_${2: }$1()
 	assert($3)
