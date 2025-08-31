@@ -125,9 +125,20 @@ while ${1:condition}:
 endsnippet
 
 
+# Godot has no enumerated for loop, so we have to build it ourselves.
 snippet for "for loop" b
-for ${1:item} in ${2:iterable}:
-	${3:${VISUAL:pass}}
+for ${9:`!p
+if t[3]:
+	snip.rv = "i"
+else:
+	snip.rv = "item"
+`} in ${2:iterable}${3:.size()}:
+	${4:`!p
+if t[3]:
+	snip.rv = snip.mkline(f"var item = {t[2]}[{t[9]}]")
+else:
+	snip.rv = snip.v.text
+`}
 endsnippet
 
 snippet fore "for each loop (dictionary)" b
@@ -136,6 +147,7 @@ for ${1:key} in ${2:iterable}:
 	${3:${VISUAL:pass}}
 endsnippet
 
+# range() is optional: Could be just for i in 10:
 snippet fori "for in range"
 for ${1:i} in range(${2:10}):
 	${3:${VISUAL}}
