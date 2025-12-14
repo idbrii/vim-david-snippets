@@ -55,6 +55,10 @@ snippet append "Add to end of array" b
 ${1:${VISUAL:array}}.append(${2:entry})
 endsnippet
 
+snippet append "Merge array into array" b
+${1:${VISUAL:array}}.append_array(${2:list})
+endsnippet
+
 # Not sure how bad for perf creating all these timers is, but it's easy for prototyping.
 snippet delay "Add a coroutine delay" b
 await get_tree().create_timer(${1:duration}).timeout
