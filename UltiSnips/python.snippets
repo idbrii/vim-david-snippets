@@ -145,9 +145,14 @@ else:
 $0
 endsnippet
 
-snippet /for(e?)/ "for" r
+snippet for "for"
 for ${1:needle} in ${2:haystack}:
 	${3:${VISUAL}}
+endsnippet
+
+snippet fore "for in dictionary"
+for ${1:k,v} in ${2:haystack}.items():
+	${9:${VISUAL}}
 endsnippet
 
 snippet fori "for in range"
